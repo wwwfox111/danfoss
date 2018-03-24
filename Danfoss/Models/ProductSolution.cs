@@ -21,24 +21,31 @@ namespace Danfoss.Models
         /// <summary>
         /// ID
         /// </summary>
+        [XmlAttribute("Id")]
         public int Id { get; set; }
         /// <summary>
         /// 解决方案名称
         /// </summary>
-        public string Name { get; set; }
+        [XmlAttribute("Title")]
+        public string Title { get; set; }
         /// <summary>
         /// 大图（详情页使用）
         /// </summary>
+        [XmlAttribute("BigPicUrl")]
         public string BigPicUrl { get; set; }
         /// <summary>
         /// 小图（首页使用）
         /// </summary>
+        [XmlAttribute("SmallPicUrl")]
         public string SmallPicUrl { get; set; }
+
+        [XmlIgnore]
+        public string LinkUrl { get; set; }
 
         /// <summary>
         /// 解决方案产品资料
         /// </summary>
-        public List<ProductItem> Items { get; set; } = new List<ProductItem>();
+        public List<ProductItem> Products { get; set; } = new List<ProductItem>();
 
     }
 
@@ -47,29 +54,37 @@ namespace Danfoss.Models
         /// <summary>
         /// ID
         /// </summary>
+        [XmlAttribute("Id")]
         public int Id { get; set; }
         /// <summary>
         /// 资料名称
         /// </summary>
-        public string Name { get; set; }
+        [XmlAttribute("Title")]
+        public string Title { get; set; }
+
+        /// <summary>
+        /// 副标题
+        /// </summary>
+        [XmlAttribute("SubTitle")]
+        public string SubTitle { get; set; }
         /// <summary>
         /// 小图
         /// </summary>
+        [XmlAttribute("SmallPicUrl")]
         public string SmallPicUrl { get; set; }
 
         /// <summary>
         /// 大图
         /// </summary>
+        [XmlAttribute("BigPicUrl")]
         public string BigPicUrl { get; set; }
-
-        /// <summary>
-        /// 描述
-        /// </summary>
-        public string Desc { get; set; }
 
         /// <summary>
         /// 下载地址
         /// </summary>
-        public string DownloadUrl { get; set; }
+        [XmlAttribute("FileUrl")]
+        public string FileUrl { get; set; }
+
+
     }
 }

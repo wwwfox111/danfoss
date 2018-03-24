@@ -29,6 +29,10 @@ namespace Danfoss.Data
         }
 
 
+        public virtual Solution FindSolutionById(int id)
+        {
+            return GetAll().Solutions.FirstOrDefault(c => c.Id == id);
+        }
 
         public virtual string CacheKeyPrefix
         {
@@ -42,7 +46,7 @@ namespace Danfoss.Data
         /// 获取解决方案数据信息
         /// </summary>
         /// <returns></returns>
-        public SolutionData GetDataSource()
+        public SolutionData GetAll()
         {
             SolutionData result = null;
             var type = typeof(SolutionData);

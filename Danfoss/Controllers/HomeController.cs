@@ -30,7 +30,7 @@ namespace Danfoss.Controllers
 
         public ActionResult Test()
         {
-            var data = LocalDataProvider.Current.GetDataSource();
+            var data = LocalDataProvider.Current.GetAll();
             var str = WebHelper.GetViewHtml(this.ControllerContext, "~/Views/Shared/EmailTemplate.cshtml", data.Solutions);
             return Content(str);
         }
@@ -112,8 +112,14 @@ namespace Danfoss.Controllers
             //       }
             //     }
             //}); ;
-            var data = LocalDataProvider.Current.GetDataSource();
+            var data = LocalDataProvider.Current.GetAll();
             return this.Content(XmlHelper.SerializeXML(data));
+        }
+
+        public ActionResult Detail(int id)
+        {
+            var solution = LocalDataProvider.Current.FindSolutionById(id);
+            return View(solution);
         }
 
     }

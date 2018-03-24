@@ -1,6 +1,7 @@
-﻿
+﻿@using Danfoss.Extensions
 @{
     Layout = null;
+    var data = Danfoss.Data.LocalDataProvider.Current.GetAll();
 }
 <!DOCTYPE html>
 <html>
@@ -42,33 +43,19 @@
     <script type="text/javascript" charset="UTF-8" src="~/content/js/common.js"></script>
     <script type="text/javascript">
 		var Waterfall = new huiWaterfall('#HUI_Waterfall');
-		var titles=[
-			'丹佛斯冷水机组解决方案',
-			'丹佛斯热泵解决方案',
-			'丹佛斯商用空调压缩机解决方案',
-			'丹佛斯工业制冷解决方案',
-			'丹佛斯冷冻冷藏压缩机解决方案',
-			'丹佛斯冷藏车制冷解决方案',
-			'丹佛斯冷库解决方案',
-			'丹佛斯冷藏车制冷系统解决方案',
-			'丹佛斯智能商超解决方案',
-			'丹佛斯数据中心应用解决方案',
-			'丹佛斯热泵烘干解决方案',
-			'VLT®New E机柜变频器',
-		]
-		var data = new Array();
-		for (var i = 1; i <= 12; i++) {
-			var img='/content/images/product-'+i+'-3x.jpg'
-			data.push({ img: img, title: titles[i-1] });
-		}
-		var page = 1;
+        var data = new Array();
+        @foreach(var solution in data.Solutions)
+        {
+            <text>data.push({title:'@solution.Title',img:'@Url.Img(solution.SmallPicUrl)',url:'@Url.SolutionUrl(solution.Id)'});</text>
+        }
+        var page = 1;
 		getList();
 		function getList() {
 			//组合dom
 			var str = '';
 			for (var i = 0; i < data.length; i++) {
 				str += '<div class="hui-water-items">' +
-					'<a href="detail.html">' +
+					'<a href="'+data[i].url+'">' +
 					'<div class="hui-water-items-img"><img src="' + data[i].img + '" /></div>' +
 					'<div class="hui-water-items-text">'+data[i].title+'</div>' +
 					'</a></div>';
