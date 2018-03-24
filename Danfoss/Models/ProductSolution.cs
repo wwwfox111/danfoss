@@ -2,13 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Xml.Serialization;
 
 namespace Danfoss.Models
 {
+    [XmlRoot(ElementName = "Data")]
+    public class SolutionData
+    {
+        public List<Solution> Solutions { get; set; } = new List<Solution>();
+    }
+
+
     /// <summary>
     /// 解决方案项目
     /// </summary>
-    public class ProductSolution
+    public class Solution
     {
         /// <summary>
         /// ID
@@ -30,7 +38,7 @@ namespace Danfoss.Models
         /// <summary>
         /// 解决方案产品资料
         /// </summary>
-        public List<ProductItem> Items { get; set; }
+        public List<ProductItem> Items { get; set; } = new List<ProductItem>();
 
     }
 
