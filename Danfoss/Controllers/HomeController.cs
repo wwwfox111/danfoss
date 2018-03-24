@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Danfoss.Models;
 using Danfoss.Data;
 using System.Data.Entity;
+using System.IO;
 
 namespace Danfoss.Controllers
 {
@@ -17,13 +18,13 @@ namespace Danfoss.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            using (DanfossDbEntities db = new DanfossDbEntities())
-            {
-                var list = db.Customer.AsNoTracking().ToList();
-                Lgr.Log.Info(JsonConvert.SerializeObject(list));
-            }
-
-
+            //using (DanfossDbEntities db = new DanfossDbEntities())
+            //{
+            //    var list = db.Customer.AsNoTracking().ToList();
+            //    Lgr.Log.Info(JsonConvert.SerializeObject(list));
+            //}
+           // MemoryStream ms = QrCodeHelper.RenderQrCode("sdfsadfsdfsa", "H", 20);
+           //return File(ms.ToArray(), "image/jpeg");
             return View();
         }
 
