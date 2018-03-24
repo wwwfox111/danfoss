@@ -89,6 +89,47 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\fonts\iconfont.svg" />
+    <Content Include="Content\css\hui.css" />
+    <Content Include="Content\css\main.css" />
+    <Content Include="Content\images\back%403x.png" />
+    <Content Include="Content\images\banner%403x.jpg" />
+    <Content Include="Content\images\detail-banner%403x.jpg" />
+    <Content Include="Content\images\download%403x.png" />
+    <Content Include="Content\images\gouxuan%403x.png" />
+    <Content Include="Content\images\home%403x.png" />
+    <Content Include="Content\images\logo%403x.png" />
+    <Content Include="Content\images\menu%403x.png" />
+    <Content Include="Content\images\product-1%403x.jpg" />
+    <Content Include="Content\images\product-10%403x.jpg" />
+    <Content Include="Content\images\product-11%403x.jpg" />
+    <Content Include="Content\images\product-12%403x.jpg" />
+    <Content Include="Content\images\product-2%403x.jpg" />
+    <Content Include="Content\images\product-3%403x.jpg" />
+    <Content Include="Content\images\product-4%403x.jpg" />
+    <Content Include="Content\images\product-5%403x.jpg" />
+    <Content Include="Content\images\product-6%403x.jpg" />
+    <Content Include="Content\images\product-7%403x.jpg" />
+    <Content Include="Content\images\product-8%403x.jpg" />
+    <Content Include="Content\images\product-9%403x.jpg" />
+    <Content Include="Content\images\product-pic%403x.png" />
+    <Content Include="Content\images\weixuanze%403x.png" />
+    <Content Include="Content\js\cities.js" />
+    <Content Include="Content\js\common.js" />
+    <Content Include="Content\js\flexible.min.js" />
+    <Content Include="Content\js\hui-accordion.js" />
+    <Content Include="Content\js\hui-form.js" />
+    <Content Include="Content\js\hui-image-cuter.js" />
+    <Content Include="Content\js\hui-picker.js" />
+    <Content Include="Content\js\hui-popover-msg.js" />
+    <Content Include="Content\js\hui-refresh-load-more.js" />
+    <Content Include="Content\js\hui-select-beautify.js" />
+    <Content Include="Content\js\hui-star.js" />
+    <Content Include="Content\js\hui-swipe.js" />
+    <Content Include="Content\js\hui-tab.js" />
+    <Content Include="Content\js\hui-touch-pwd.js" />
+    <Content Include="Content\js\hui-water-fall.js" />
+    <Content Include="Content\js\hui.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -102,7 +143,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
+    <Content Include="Content\css\fonts\iconfont.eot" />
+    <Content Include="Content\css\fonts\iconfont.ttf" />
+    <Content Include="Content\css\fonts\iconfont.woff" />
+    <Content Include="Content\css\fonts\PingFang Medium.ttf" />
+    <Content Include="Content\css\fonts\PingFang Regular.ttf" />
     <None Include="packages.config" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -113,7 +160,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

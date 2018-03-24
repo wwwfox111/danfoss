@@ -1,0 +1,88 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta id="viewport" name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no; viewport-fit=cover">
+    <title>HUI</title>
+    <link rel="stylesheet" type="text/css" href="~/content/css/hui.css" />
+    <link rel="stylesheet" href="~/content/css/main.css">
+    <script src="~/content/js/flexible.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="btn-left"></div>
+            <div class="dropdown">
+                <a href="download.html" class="dropdown-item">
+                    <i class="icon download"></i>下载全部资料
+                </a>
+            </div>
+        </header>
+        <div class="hui-wrap">
+            <div class="banner">
+                <img src="~/content/images/banner@3x.jpg" alt="">
+            </div>
+            <div>
+                <div style="padding:10px 0px;" id="HUI_Waterfall"></div>
+            </div>
+        </div>
+        <div class="footer">
+            隐私声明：本资料下载中心不会收集任何个人信息
+        </div>
+    </div>
+    <script src="~/content/js/hui.js" type="text/javascript" charset="utf-8"></script>
+    <script src="~/content/js/hui-water-fall.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="UTF-8" src="~/content/js/hui-refresh-load-more.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="~/content/js/common.js"></script>
+    <script type="text/javascript">
+		var Waterfall = new huiWaterfall('#HUI_Waterfall');
+		var titles=[
+			'丹佛斯冷水机组解决方案',
+			'丹佛斯热泵解决方案',
+			'丹佛斯商用空调压缩机解决方案',
+			'丹佛斯工业制冷解决方案',
+			'丹佛斯冷冻冷藏压缩机解决方案',
+			'丹佛斯冷藏车制冷解决方案',
+			'丹佛斯冷库解决方案',
+			'丹佛斯冷藏车制冷系统解决方案',
+			'丹佛斯智能商超解决方案',
+			'丹佛斯数据中心应用解决方案',
+			'丹佛斯热泵烘干解决方案',
+			'VLT®New E机柜变频器',
+		]
+		var data = new Array();
+		for (var i = 1; i <= 12; i++) {
+			var img='/content/images/product-'+i+'-3x.jpg'
+			data.push({ img: img, title: titles[i-1] });
+		}
+		var page = 1;
+		getList();
+		function getList() {
+			//组合dom
+			var str = '';
+			for (var i = 0; i < data.length; i++) {
+				str += '<div class="hui-water-items">' +
+					'<a href="detail.html">' +
+					'<div class="hui-water-items-img"><img src="' + data[i].img + '" /></div>' +
+					'<div class="hui-water-items-text">'+data[i].title+'</div>' +
+					'</a></div>';
+			}
+			Waterfall.addItems(str);
+			if (page >= 1) {
+				hui.endLoadMore(true);
+			} else {
+				hui.endLoadMore();
+			}
+			page++;
+		}
+		hui.loadMore(getList,' ');
+    </script>
+</body>
+
+</html>
