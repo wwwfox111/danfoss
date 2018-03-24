@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Test";
+}
+
+<div>
+    <label>邮箱地址：</label>
+    <input type="text" id="txtEmail" />
+    <label>发送内容：</label>
+    <textarea id="txtContent">
+
+</textarea>
+    <input type="button" value="提交" id="btnSubmit" />
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $("#btnSubmit").click(function () {
+                if ($("#txtEmail").val() == "") {
+                    return;
+                }
+                $.ajax({
+                    url: "@Url.Action("SendEmail")",
+                    type: "post",
+                    data: { emailAddress: $("#txtEmail").val(), content: $("#txtContent").val()},
+                    success: function (data) {
+
+                    }
+                })
+            });
+        })
+    </script>
+    }
