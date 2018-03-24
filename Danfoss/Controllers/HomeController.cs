@@ -28,7 +28,9 @@ namespace Danfoss.Controllers
 
         public ActionResult Test()
         {
-            return View();
+            var data = LocalDataProvider.Current.GetDataSource();
+            var str = WebHelper.GetViewHtml(this.ControllerContext, "~/Views/Shared/EmailTemplate.cshtml", data.Solutions);
+            return Content(str);
         }
 
         [ValidateInput(false)]
