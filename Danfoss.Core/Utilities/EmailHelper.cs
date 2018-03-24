@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace Danfoss.Core.Utilities
 {
@@ -13,7 +14,7 @@ namespace Danfoss.Core.Utilities
    public static class EmailHelper
     {
         /// <summary>
-        /// 
+        /// 发送邮件
         /// </summary>
         /// <param name="mailTo"></param>
         /// <param name="mailSubject">邮箱主题</param>
@@ -22,9 +23,9 @@ namespace Danfoss.Core.Utilities
         public static bool SendEmail(string mailTo, string mailSubject, string mailContent)
         {
             // 设置发送方的邮件信息,例如使用网易的smtp
-            string smtpServer = "smtp.163.com"; //SMTP服务器
-            string mailFrom = "xiaozhi091425@163.com"; //登陆用户名
-            string userPassword = "xiaogui564335";//登陆密码
+            string smtpServer = ConfigurationManager.AppSettings["SmtpServer"];// SMTP服务器
+            string mailFrom = ConfigurationManager.AppSettings["MailFrom"];// 登陆用户名
+            string userPassword = ConfigurationManager.AppSettings["MailPassword"];//登陆密码
 
             // 邮件服务设置
             SmtpClient smtpClient = new SmtpClient();
