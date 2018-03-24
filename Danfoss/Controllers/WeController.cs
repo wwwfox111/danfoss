@@ -1,4 +1,5 @@
 ﻿using Danfoss.Core;
+using Danfoss.Core.Utilities;
 using Danfoss.Core.We;
 using System;
 using System.Collections.Generic;
@@ -42,11 +43,13 @@ namespace Danfoss.Controllers
                 }
                 else
                 {
+                    Lgr.Log.Debug("校验消息失败");
                     //_logService.RecordLog("", "", LogLevel.Debug, "微信事件", "校验消息失败。\r\n地址：" + Request.RawUrl);
                 }
             }
             catch (Exception ex)
             {
+                Lgr.Log.Error(ex.Message, ex);
                // _logService.RecordLog("", "", LogLevel.Debug, "微信事件", ex.Message + "\r\n详细错误：" + ex.StackTrace);
             }
             return Content(result);
@@ -74,7 +77,7 @@ namespace Danfoss.Controllers
             sin.Read(readBytes, 0, readBytes.Length);
             var inputXml = Encoding.UTF8.GetString(readBytes);
 
-           // _logService.RecordLog(LogLevel.Debug, "微信事件", inputXml);
+            Lgr.Log.Debug("微信事件："+inputXml);
 
             //使用XMLDocument加载信息结构
             var xmlDoc = new XmlDocument();
@@ -131,10 +134,7 @@ namespace Danfoss.Controllers
         /// <returns>响应电文</returns>
         private string HandleSubscribe(Dictionary<string, string> fields)
         {
-          
-
-            var returnXml = string.Empty;
-           
+            var returnXml = string.Empty;          
 
             return returnXml;
         }

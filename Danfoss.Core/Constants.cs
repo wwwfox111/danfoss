@@ -61,9 +61,9 @@ namespace Danfoss.Core
                 var environment = ConfigurationManager.AppSettings["SiteEnvironment"];
                 if (environment != null && environment != "")
                 {
-                    if (environment == SiteEnvironment.UAT.ToString()) //简单点网 (测试环境)
+                    if (environment == SiteEnvironment.UAT.ToString()) // (测试环境)
                         appId = "wxfdd692381aacf136";
-                    else if (environment == SiteEnvironment.PRO.ToString()) //简单点智慧酒店 (正式环境)
+                    else if (environment == SiteEnvironment.PRO.ToString()) // (正式环境)
                         appId = "wxeafc2c148a9db384";
                 }
                 return appId;
@@ -81,9 +81,9 @@ namespace Danfoss.Core
                 var environment = ConfigurationManager.AppSettings["SiteEnvironment"];
                 if (environment != null && environment != "")
                 {
-                    if (environment == SiteEnvironment.UAT.ToString()) //简单点网 (测试环境)
+                    if (environment == SiteEnvironment.UAT.ToString()) // (测试环境)
                         appSecret = "91c8d3c5e02627a6409a7775263ecc8a";
-                    else if (environment == SiteEnvironment.PRO.ToString()) //简单点智慧酒店 (正式环境)
+                    else if (environment == SiteEnvironment.PRO.ToString()) // (正式环境)
                         appSecret = "2b712e86f8aabe9640fe6a72576effa9";
                 }
                 return appSecret;
