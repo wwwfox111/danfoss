@@ -13,7 +13,7 @@ using System.Xml;
 
 namespace Danfoss.Controllers
 {
-    public class WeController : Controller
+    public class WeController : BaseController
     {
         // GET: We
         public ActionResult Index()

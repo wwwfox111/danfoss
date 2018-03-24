@@ -8,10 +8,11 @@ using System.Web.Mvc;
 using Newtonsoft.Json;
 using Danfoss.Models;
 using Danfoss.Data;
+using System.Data.Entity;
 
 namespace Danfoss.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         // GET: Home
         public ActionResult Index()
@@ -37,7 +38,24 @@ namespace Danfoss.Controllers
         [HttpPost]
         public ActionResult SendEmail(string emailAddress,string content)
         {
-         var result=   EmailHelper.SendEmail(emailAddress, "邮件测试", content);
+         var result=   EmailHelper.SendEmail(emailAddress, "丹佛斯资料下载", content);
+            if (result)
+            {
+                #region  保存邮箱地址
+                using (var db = new DanfossDbEntities())
+                {
+                    var model = db.Customer.FirstOrDefault(o => o.OpenId == CurAccount);
+                    if (model != null)
+                    {
+                        model.Email = emailAddress;
+                        db.Customer.Attach(model);
+                        db.Entry(model).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                }
+
+                #endregion 
+            }
             return Json(new { IsSuccess=result});
         }
 
