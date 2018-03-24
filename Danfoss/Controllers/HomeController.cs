@@ -26,6 +26,19 @@ namespace Danfoss.Controllers
             return View();
         }
 
+        public ActionResult Test()
+        {
+            return View();
+        }
+
+        [ValidateInput(false)]
+        [HttpPost]
+        public ActionResult SendEmail(string emailAddress,string content)
+        {
+         var result=   EmailHelper.SendEmail(emailAddress, "邮件测试", content);
+            return Json(new { IsSuccess=result});
+        }
+
 
         public ActionResult DataSource()
         {
