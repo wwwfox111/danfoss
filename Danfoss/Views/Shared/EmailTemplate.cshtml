@@ -1,0 +1,31 @@
+﻿@using Danfoss.Models;
+@model  List<ProductSolution>
+@{
+    ViewBag.Title = "EmailTemplate";
+    Layout = null;
+}
+
+<html>
+<body>
+    <div>
+        您好：
+        根据您之前的选择，以下是相关的丹佛斯资料。
+        请点击资料标题，即可查看更多细节。
+    </div>
+    @foreach (var m in Model)
+    {
+        <ul>
+            <li>
+                @m.Name
+            <ul>
+                @foreach (var n in m.Items)
+                {
+                    <li><a href="@n.DownloadUrl"> @n.Name</a></li>
+                }
+            </ul>
+        </li>
+    </ul>
+}
+</body>
+</html>
+
