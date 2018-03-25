@@ -46,7 +46,7 @@
         var data = new Array();
         @foreach(var solution in data.Solutions)
         {
-            <text>data.push({title:'@solution.Title',img:'@Url.Img(solution.SmallPicUrl)',url:'@Url.SolutionUrl(solution.Id)'});</text>
+            <text>data.push({title:'@solution.Title',img:'@Url.Img(solution.SmallPicUrl)',url:'@Url.Solution(solution.Id)'});</text>
         }
         var page = 1;
 		getList();
