@@ -99,10 +99,10 @@
 </head>
 <body>
     <header>
-        <img src="@Url.GetRootPath("/Content/images/logo@2x.png")" alt="">
+        <img src="cid:pic1" alt="">
     </header>
     <section class="main">
-        <div class="main_img"><img src="@Url.GetRootPath("/Content/images/bg2.png")" alt=""></div>
+        <div class="main_img"><img src="cid:pic2" alt=""></div>
         <div class="main_text">
             @foreach (var m in Model)
             {
@@ -119,8 +119,8 @@
         </div>
     </section>
     <footer>
-        <div class="f_img"><img src="@Url.GetRootPath("/Content/images/f_bg.png")" alt="" style="margin-bottom: -7px;"></div>
-        <div class="ewm_img"><img src="@Url.GetRootPath("/Content/images/erweima.png")" alt=""></div>
+        <div class="f_img"><img src="cid:pic3" alt="" style="margin-bottom: -7px;"></div>
+        <div class="ewm_img"><img src="cid:pic4" alt=""></div>
     </footer>
 </body>
 </html>

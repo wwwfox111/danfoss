@@ -5,6 +5,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using System.Web;
 
 namespace Danfoss.Core.Utilities
 {
@@ -41,6 +42,21 @@ namespace Danfoss.Core.Utilities
             mailMessage.IsBodyHtml = true;//设置为HTML格式
             mailMessage.Priority = MailPriority.Low;//优先级
 
+            // 添加附件
+            string[] files = new string[] {
+                HttpContext.Current.Server.MapPath("~/Content/images/logo@2x.png"),
+                HttpContext.Current.Server.MapPath("/Content/images/bg2.png"),
+                HttpContext.Current.Server.MapPath("~/Content/images/f_bg.png"),
+                HttpContext.Current.Server.MapPath("~/Content/images/erweima.png") };
+            for (int i = 0; i < files.Length; i++)
+            {
+                mailMessage.Attachments.Add(new Attachment(files[i]));
+                mailMessage.Attachments[i].ContentType.Name = "image/png";
+                mailMessage.Attachments[i].ContentId = "pic" + i;
+                mailMessage.Attachments[i].ContentDisposition.Inline = true;
+                mailMessage.Attachments[i].TransferEncoding = System.Net.Mime.TransferEncoding.Base64;
+            }            
+
             try
             {
                 smtpClient.Send(mailMessage); // 发送邮件
@@ -49,6 +65,13 @@ namespace Danfoss.Core.Utilities
             catch (SmtpException ex)
             {
                 return false;
+            }
+            finally
+            {
+                for (int i = 0; i < mailMessage.Attachments.Count; i++) //释放资源
+                {
+                    mailMessage.Attachments[i].Dispose();
+                }
             }
         }
     }
