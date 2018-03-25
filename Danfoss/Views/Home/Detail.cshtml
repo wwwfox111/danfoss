@@ -1,4 +1,5 @@
-﻿
+﻿@using Danfoss.Extensions;
+@model  Danfoss.Models.Solution
 @{
     Layout = null;
 }
@@ -30,7 +31,7 @@
         </header>
         <div class="hui-wrap">
             <div class="banner">
-                <img src="~/content/images/detail-banner@3x.jpg" alt="">
+                <img src="@Url.Img(Model.BigPicUrl)" alt="">
             </div>
             <div class="hui-media-list">
                 <ul>
