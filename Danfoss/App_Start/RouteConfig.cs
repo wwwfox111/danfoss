@@ -22,6 +22,12 @@ namespace Danfoss
              new { id = @"\d*" }
              );
 
+            routes.MapRoute(
+              "DownloadAll",
+              "download",
+              new { controller = "Home", action = "Download" }
+              );
+
 
             routes.MapRoute(
                 name: "Default",

@@ -71,66 +71,15 @@ namespace Danfoss.Controllers
             return Json(new { IsSuccess = result });
         }
 
-
-        public ActionResult DataSource()
-        {
-            //var data = new SolutionData();
-            //data.Solutions.Add(new Solution
-            //{
-            //    Id = 1,
-            //    Name = "丹佛斯冷水机组解决方案",
-            //    BigPicUrl = "/content/images/product-1-3x.jpg",
-            //    SmallPicUrl = "/content/images/product-1-3x.jpg",
-            //    Items = new List<ProductItem> {
-            //       new ProductItem{
-            //           Id=1,
-            //           Name="冷水机组",
-            //           Desc="由内至外，面面俱到",
-            //           BigPicUrl="/content/images/product-1-3x.jpg",
-            //           SmallPicUrl="/content/images/product-1-3x.jpg",
-            //           DownloadUrl="http://www.baidu.com/download.pdf"
-            //       },
-            //       new ProductItem{
-            //               Id=2,
-            //           Name="冷水机组",
-            //           Desc="由内至外，面面俱到",
-            //           BigPicUrl="/content/images/product-1-3x.jpg",
-            //           SmallPicUrl="/content/images/product-1-3x.jpg",
-            //           DownloadUrl="http://www.baidu.com/download.pdf"
-            //       }
-            //     }
-            //});
-            //data.Solutions.Add(new Solution
-            //{
-            //    Id = 1,
-            //    Name = "丹佛斯冷水机组解决方案",
-            //    BigPicUrl = "/content/images/product-1-3x.jpg",
-            //    SmallPicUrl = "/content/images/product-1-3x.jpg",
-            //    Items = new List<ProductItem> {
-            //       new ProductItem{
-            //           Id=1,
-            //           Name="冷水机组",
-            //           Desc="由内至外，面面俱到",
-            //           BigPicUrl="/content/images/product-1-3x.jpg",
-            //           SmallPicUrl="/content/images/product-1-3x.jpg"
-            //       },
-            //       new ProductItem{
-            //               Id=2,
-            //           Name="冷水机组",
-            //           Desc="由内至外，面面俱到",
-            //           BigPicUrl="/content/images/product-1-3x.jpg",
-            //           SmallPicUrl="/content/images/product-1-3x.jpg"
-            //       }
-            //     }
-            //}); ;
-            var data = LocalDataProvider.Current.GetAll();
-            return this.Content(XmlHelper.SerializeXML(data));
-        }
-
         public ActionResult Detail(int id)
         {
             var solution = LocalDataProvider.Current.FindSolutionById(id);
             return View(solution);
+        }
+
+        public ActionResult Download()
+        {
+            return View();
         }
 
         /// <summary>
