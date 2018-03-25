@@ -17,5 +17,10 @@ namespace Danfoss.Extensions
         {
             return string.Format("/detail/{0}.html", id);
         }
+
+        public static string DownloadUrl(this UrlHelper helper, string file)
+        {
+            return string.Format("/download/{0}", helper.RequestContext.HttpContext.Server.UrlEncode(file));
+        }
     }
 }
