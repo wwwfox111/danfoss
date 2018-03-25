@@ -1,4 +1,4 @@
-﻿
+﻿@model Solution
 @{
     Layout = null;
 }
@@ -21,7 +21,7 @@
             <div class="btn-left"></div>
             <a href="index.html" class="btn-right-home"></a>
             <div class="dropdown">
-                <a href="index.html" class="dropdown-item">
+                <a href="@Url.Action("Index", "Home")" class="dropdown-item">
                     <i class="icon back"></i>查看全部应用
                 </a>
                 <a href="download.html" class="dropdown-item">
@@ -31,48 +31,62 @@
         </header>
         <div class="hui-wrap">
             <div class="banner">
-                <img src="~/content/images/detail-banner@3x.jpg" alt="">
+                <img src="@Url.Img(Model.BigPicUrl)" alt="">
             </div>
             <div class="hui-media-list">
                 <ul>
-                    <li>
-                        <div class="hui-media-list-img">
-                            <img src="~/content/images/product-pic@3x.png" />
-                        </div>
-                        <div class="hui-media-content">
-                            <h1>ETS Colibri 电子膨胀阀</h1>
-                            <p>革命性创新，灵便可靠</p>
-                        </div>
-                        <div class="hui-media-right hui-form-radios">
-                            <button type="button" class="button button-red">预览</button>
-                            <input type="checkbox" value="1" name="c1" id="c1" /><label for="c1"></label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="hui-media-list-img">
-                            <img src="~/content/images/product-pic@3x.png" />
-                        </div>
-                        <div class="hui-media-content">
-                            <h1>EVR 系列电磁阀</h1>
-                            <p>全新升级</p>
-                        </div>
-                        <div class="hui-media-right hui-form-radios">
-                            <button type="button" class="button button-red">预览</button>
-                            <input type="checkbox" value="2" name="c1" id="c2" /><label for="c2"></label>
-                        </div>
-                    </li>
+                    @foreach (var item in Model.Products)
+                    {
+                        <li>
+                            <div class="hui-media-list-img">
+                                <img src="@Url.Img(item.SmallPicUrl)" />
+                            </div>
+                            <div class="hui-media-content">
+                                <h1>@item.Title</h1>
+                                <p>@item.SubTitle</p>
+                            </div>
+                            <div class="hui-media-right hui-form-radios">
+                                <button type="button" class="button button-red">预览</button>
+                                <input type="checkbox" value="@item.Id" name="c1" id="c@(item.Id)" /><label for="c@(item.Id)"></label>
+                            </div>
+                        </li>
+                    }
                 </ul>
             </div>
             <div class="detail-button">
-                <a href="download.html" type="button" class="hui-button button-red">发送至邮箱下载</a>
+                <a id="btnDownload" class="hui-button button-red">发送至邮箱下载</a>
             </div>
         </div>
     </div>
     <script src="~/content/js/hui.js" type="text/javascript" charset="utf-8"></script>
     <script src="~/content/js/hui-form.js"></script>
     <script type="text/javascript" charset="UTF-8" src="~/content/js/common.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script type="text/javascript">
+        $(function () {
+            $("#btnDownload").click(function () {
+                var checked = $(".hui-media-list input[name=c1]:checked");
+                if (checked.length == 0) {
+                    return;
+                }
+                var ckb_value = [];
+                checked.each(function () {
+                    ckb_value.push($(this).val());
+                });
+                @*$.get('@Url.Action("GetContent", "Home")', { idList: ckb_value },
+                    function (result) {
+                        
+                    });
+                $.ajax({
+                    url: "@Url.Action("SendEmail")",
+                    type: "post",
+                    data: { emailAddress: $("#txtEmail").val(), content: $("#txtContent").val()},
+                    success: function (data) {
 
+                    }
+                })*@
+            });
+        })
     </script>
 </body>
 

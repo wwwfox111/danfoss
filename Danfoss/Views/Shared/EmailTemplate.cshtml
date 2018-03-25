@@ -16,11 +16,11 @@
     {
         <ul>
             <li>
-                @m.Name
+                @m.Title
             <ul>
-                @foreach (var n in m.Items)
+                @foreach (var n in m.Products)
                 {
-                    <li><a href="@n.DownloadUrl"> @n.Name</a></li>
+                    <li><a href="@Url.DownloadUrl(n.FileUrl)"> @n.Title</a></li>
                 }
             </ul>
         </li>
