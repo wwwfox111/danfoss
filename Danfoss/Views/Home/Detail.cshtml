@@ -38,7 +38,10 @@
                     {
                         <li>
                             <div class="hui-media-list-img">
-                                <img src="@Url.Img(item.SmallPicUrl)" />
+                                @if (!string.IsNullOrEmpty(item.SmallPicUrl))
+                                {
+                                    <img src="@Url.Img(item.SmallPicUrl,"solution")" />
+                                }
                             </div>
                             <div class="hui-media-content">
                                 <h1>@item.Title</h1>

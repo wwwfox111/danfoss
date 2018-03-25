@@ -18,7 +18,7 @@ namespace Danfoss.Controllers
         // GET: Home
         public ActionResult Index()
         {
-
+            
             #region 微信认证 
             //Customer customer = null;
             //var actionResult = WeOAuth(out customer, Url.Action("Index"));
