@@ -15,7 +15,7 @@ namespace Danfoss.Extensions
 
         public static string SolutionUrl(this UrlHelper helper, int id)
         {
-            return string.Format("/detail/{0}.html", id);
+            return string.Format("solution/detail/{0}", id);
         }
 
         public static string DownloadUrl(this UrlHelper helper, string file)

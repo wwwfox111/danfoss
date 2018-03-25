@@ -15,7 +15,7 @@ namespace Danfoss
 
             routes.MapRoute(
              "SolutionDetail",
-             "detail/{id}.html",
+             "solution/detail/{id}",
              new { controller = "Home", action = "Detail", id = 0 },
              new { id = @"\d*" }
              );

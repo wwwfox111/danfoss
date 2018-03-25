@@ -116,6 +116,7 @@
     <Content Include="App_Data\DanfossDb_log.ldf">
       <DependentUpon>DanfossDb.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\Data.xml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\fonts\iconfont.svg" />
