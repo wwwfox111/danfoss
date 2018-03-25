@@ -1,0 +1,38 @@
+﻿@using Danfoss.Data;
+
+@{
+    Layout = null;
+    var data = LocalDataProvider.Current.GetAll();
+   var selectItem= data.Solutions.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Title });
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta id="viewport" name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no; viewport-fit=cover">
+    <title>生成二维码</title>
+</head>
+
+<body>
+    <div>
+            <label>行业解决方案：</label>
+            @Html.DropDownList("Solution", selectItem)
+            <label>二维码图片像素</label>
+            <select id="pixels" name="pixels">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="00">30</option>
+            </select>
+            <a  id="btnGenerate" href="javascript:void(0);">生成二维码</a>
+       
+    </div>
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        $("#btnGenerate").click(function () {
+            window.open( "@Url.Action("Generate")" + "?id=" + $("#Solution").val() + "&pixels=" + $("#pixels").val());
+        })
+    </script>
+</body>
+
+</html>

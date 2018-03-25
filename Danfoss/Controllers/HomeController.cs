@@ -18,13 +18,13 @@ namespace Danfoss.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            
+
             #region 微信认证 
             //Customer customer = null;
             //var actionResult = WeOAuth(out customer, Url.Action("Index"));
             //if (actionResult != null)
             //    return actionResult;
-            #endregion 
+            #endregion
             //using (DanfossDbEntities db = new DanfossDbEntities())
             //{
             //    var list = db.Customer.AsNoTracking().ToList();
@@ -131,5 +131,19 @@ namespace Danfoss.Controllers
             return View(solution);
         }
 
+
+        public ActionResult GenerateQrCode()
+        {
+            return View();
+        }
+
+        public ActionResult Generate(int id, int pixels)
+        {
+            var data = LocalDataProvider.Current.FindSolutionById(id);
+            var url = Url.Action("Detail", new { id = id });
+            url = Request.Url.GetLeftPart(UriPartial.Authority) + url;
+            MemoryStream ms = QrCodeHelper.RenderQrCode(url, "H", pixels);
+            return File(ms.ToArray(), "image/jpeg",DateTime.Now.ToString("yyyyMMddHHmmssfff")+ ".jpeg");
+        }
     }
 }
