@@ -7,12 +7,15 @@
     <label>邮箱地址：</label>
     <input type="text" id="txtEmail" />
     <label>发送内容：</label>
-    <textarea id="txtContent">
+    <textarea id="txtContent"></textarea>
 
-</textarea>
     <input type="button" value="提交" id="btnSubmit" />
-</div>
+</div>   
+
+<a href="weixin://contacts/profile/gh_34bd692a9835">点击关注我吧</a>
 @section scripts{
+    <script type="http://res.wx.qq.com/open/js/jweixin-1.2.0.js">
+    </script>
     <script type="text/javascript">
         $(function () {
             $("#btnSubmit").click(function () {
@@ -30,4 +33,4 @@
             });
         })
     </script>
-    }
+}

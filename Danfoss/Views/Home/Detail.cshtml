@@ -1,5 +1,4 @@
-﻿@using Danfoss.Extensions;
-@model  Danfoss.Models.Solution
+﻿@model Solution
 @{
     Layout = null;
 }
@@ -35,44 +34,63 @@
             </div>
             <div class="hui-media-list">
                 <ul>
-                    <li>
-                        <div class="hui-media-list-img">
-                            <img src="~/content/images/product-pic@3x.png" />
-                        </div>
-                        <div class="hui-media-content">
-                            <h1>ETS Colibri 电子膨胀阀</h1>
-                            <p>革命性创新，灵便可靠</p>
-                        </div>
-                        <div class="hui-media-right hui-form-radios">
-                            <button type="button" class="button button-red">预览</button>
-                            <input type="checkbox" value="1" name="c1" id="c1" /><label for="c1"></label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="hui-media-list-img">
-                            <img src="~/content/images/product-pic@3x.png" />
-                        </div>
-                        <div class="hui-media-content">
-                            <h1>EVR 系列电磁阀</h1>
-                            <p>全新升级</p>
-                        </div>
-                        <div class="hui-media-right hui-form-radios">
-                            <button type="button" class="button button-red">预览</button>
-                            <input type="checkbox" value="2" name="c1" id="c2" /><label for="c2"></label>
-                        </div>
-                    </li>
+                    @foreach (var item in Model.Products)
+                    {
+                        <li>
+                            <div class="hui-media-list-img">
+                                <img src="@Url.Img(item.SmallPicUrl)" />
+                            </div>
+                            <div class="hui-media-content">
+                                <h1>@item.Title</h1>
+                                <p>@item.SubTitle</p>
+                            </div>
+                            <div class="hui-media-right hui-form-radios">
+                                <button type="button" class="button button-red">预览</button>
+                                <input type="checkbox" value="@item.Id" name="c1" id="c@(item.Id)" data-title="@item.Title" data-url="@item.FileUrl" /><label for="c@(item.Id)"></label>
+                            </div>
+                        </li>
+                    }
                 </ul>
             </div>
             <div class="detail-button">
-                <a href="download.html" type="button" class="hui-button button-red">发送至邮箱下载</a>
+                <button type="button" id="downloadbtn" class="hui-button button-red">发送至邮箱下载</button>
             </div>
         </div>
     </div>
     <script src="~/content/js/hui.js" type="text/javascript" charset="utf-8"></script>
     <script src="~/content/js/hui-form.js"></script>
     <script type="text/javascript" charset="UTF-8" src="~/content/js/common.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script type="text/javascript">
-
+        hui('#downloadbtn').click(function () {
+            hui.prompt('请填写您的邮箱<br/>文件将发送至您的邮箱', ['取消', '确定'], function (val) {
+                console.log('您输入了 :' + val);
+                var checked = $(".hui-media-list input[name=c1]:checked");
+                if (checked.length == 0) {
+                    return;
+                }
+                var ckb_value = [];
+                checked.each(function () {
+                    ckb_value.push({ Title: $(this).data("title"), FileUrl: $(this).data("url") });
+                });
+                var solution = {};
+                solution.Title = "@Model.Title";
+                solution.Products = ckb_value;
+                var solutions = [solution];
+                $.ajax({
+                    url: "@Url.Action("SendEmail")",
+                    type: "post",
+                    data: { emailAddress: val, solutions: solutions},
+                    success: function (data) {
+                        utils.msg('发送成功', '邮件已发送至您的邮箱<br/>请注意查收', '关闭', function () {
+                            console.log('关闭了提示框')
+                        })
+                    }
+                })                
+            }, '例如 : 123456@qq.com', '', function () {
+                console.log('您点击了取消')
+            });
+        });
     </script>
 </body>
 
