@@ -8,9 +8,11 @@ namespace Danfoss.Extensions
 {
     public static class UrlExtensions
     {
-        public static string Img(this UrlHelper helper, string url)
+        public static string Img(this UrlHelper helper, string url, string folder = null)
         {
-            return string.Format("/content/images/{0}", url);
+            if (string.IsNullOrEmpty(folder))
+                return string.Format("/content/images/{0}", url);
+            return string.Format("/content/{1}/{0}", url, folder);
         }
 
         public static string Solution(this UrlHelper helper, int id)
@@ -20,7 +22,7 @@ namespace Danfoss.Extensions
 
         public static string Download(this UrlHelper helper, string file)
         {
-            return string.Format("/download/{0}", helper.RequestContext.HttpContext.Server.UrlEncode(file));
+            return string.Format("/content/download/{0}", helper.RequestContext.HttpContext.Server.UrlEncode(file));
         }
     }
 }

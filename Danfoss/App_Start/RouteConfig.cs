@@ -13,6 +13,8 @@ namespace Danfoss
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.IgnoreRoute("{*favicon}", new { favicon = @"(.*/)?favicon.ico(/.*)?" });
+
             routes.MapRoute(
              "SolutionDetail",
              "solution/detail/{id}",

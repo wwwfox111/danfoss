@@ -38,7 +38,10 @@
                     {
                         <li>
                             <div class="hui-media-list-img">
-                                <img src="@Url.Img(item.SmallPicUrl)" />
+                                @if (!string.IsNullOrEmpty(item.SmallPicUrl))
+                                {
+                                    <img src="@Url.Img(item.SmallPicUrl,"solution")" />
+                                }
                             </div>
                             <div class="hui-media-content">
                                 <h1>@item.Title</h1>
@@ -46,7 +49,7 @@
                             </div>
                             <div class="hui-media-right hui-form-radios">
                                 <button type="button" class="button button-red">预览</button>
-                                <input type="checkbox" value="@item.Id" name="c1" id="c@(item.Id)" data-title="@item.Title" data-url="@item.FileUrl" /><label for="c@(item.Id)"></label>
+                                <input type="checkbox" value="@item.Id" name="c1" id="c@(item.Id)" data-title="@item.Title" data-url="@Url.Download(item.FileUrl)" /><label for="c@(item.Id)"></label>
                             </div>
                         </li>
                     }
@@ -86,7 +89,7 @@
                             console.log('关闭了提示框')
                         })
                     }
-                })                
+                })
             }, '例如 : 123456@qq.com', '', function () {
                 console.log('您点击了取消')
             });
