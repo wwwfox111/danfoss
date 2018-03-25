@@ -131,7 +131,9 @@
     <Content Include="App_Data\DanfossDb_log.ldf">
       <DependentUpon>DanfossDb.mdf</DependentUpon>
     </Content>
-    <Content Include="App_Data\Data.xml" />
+    <Content Include="App_Data\Data.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\fonts\iconfont.svg" />
@@ -139,10 +141,14 @@
     <Content Include="Content\css\main.css" />
     <Content Include="Content\images\back%403x.png" />
     <Content Include="Content\images\banner%403x.jpg" />
+    <Content Include="Content\images\bg2.png" />
     <Content Include="Content\images\detail-banner%403x.jpg" />
     <Content Include="Content\images\download%403x.png" />
+    <Content Include="Content\images\erweima.png" />
+    <Content Include="Content\images\f_bg.png" />
     <Content Include="Content\images\gouxuan%403x.png" />
     <Content Include="Content\images\home%403x.png" />
+    <Content Include="Content\images\logo%402x.png" />
     <Content Include="Content\images\logo%403x.png" />
     <Content Include="Content\images\menu%403x.png" />
     <Content Include="Content\images\product-1%403x.jpg" />
@@ -212,6 +218,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\font\PingFang Bold.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -24,5 +24,10 @@ namespace Danfoss.Extensions
         {
             return string.Format("/content/download/{0}", helper.RequestContext.HttpContext.Server.UrlEncode(file));
         }
+
+        public static string GetRootPath(this UrlHelper helper, string path)
+        {
+            return helper.RequestContext.HttpContext.Request.Url.GetLeftPart(UriPartial.Authority) + path;
+        }
     }
 }

@@ -1,31 +1,127 @@
-﻿@using Danfoss.Models;
-@model  List<Solution>
+﻿@model  List<Solution>
 @{
-    ViewBag.Title = "EmailTemplate";
     Layout = null;
 }
 
-<html>
-<body>
-    <div>
-        您好：
-        根据您之前的选择，以下是相关的丹佛斯资料。
-        请点击资料标题，即可查看更多细节。
-    </div>
-    @foreach (var m in Model)
-    {
-        <ul>
-            <li>
-                @m.Title
-            <ul>
-                @foreach (var n in m.Products)
-                {
-                    <li><a href="@Url.Download(n.FileUrl)"> @n.Title</a></li>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>邮件模板</title>
+    <style type="text/css">
+        @@font-face {
+            font-family: PingFang-Bold;
+            src: url('@Url.GetRootPath("/Content/font/PingFang Bold.ttf")');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul > li {
+            list-style-type: none;
+        }
+
+        html, body {
+            font-family: PingFang-Bold;
+            font-size: 18px;
+            background: #E0E0E0;
+        }
+
+        .main {
+            margin-top: -6px;
+        }
+
+        header img, .main_img img, .f_img img, .ewm_img img {
+            width: 100%;
+        }
+
+        .main_img img, .main_text {
+            margin-bottom: 10px;
+        }
+
+        .main_text {
+            background: #fff;
+            padding: 0px 28px;
+        }
+
+            .main_text .text {
+                padding: 30px 0px 15px 0px;
+                border-bottom: 1px solid #E0E0E0;
+            }
+
+                .main_text .text:last-child {
+                    border-bottom: none;
                 }
-            </ul>
-        </li>
-    </ul>
-}
+
+            .main_text h3 {
+                display: inline-block;
+                line-height: 35px;
+                font-size: 22px;
+                padding: 0px 15px;
+                border: 1px solid #c50809;
+                color: #c50809;
+                border-radius: 20px;
+                margin-bottom: 15px;
+            }
+
+            .main_text .text ul li {
+                line-height: 30px;
+            }
+
+                .main_text .text ul li a {
+                    color: #585858;
+                    text-decoration: none;
+                }
+
+                .main_text .text ul li span {
+                    display: inline-block;
+                    width: 8px;
+                    height: 8px;
+                    background: #c50809;
+                    border-radius: 8px;
+                    margin: 0px 8px 3px 0px;
+                }
+
+        footer {
+            position: relative;
+        }
+
+            footer .ewm_img {
+                width: 23%;
+                position: absolute;
+                top: 3%;
+                left: 2%;
+            }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="@Url.GetRootPath("/Content/images/logo@2x.png")" alt="">
+    </header>
+    <section class="main">
+        <div class="main_img"><img src="@Url.GetRootPath("/Content/images/bg2.png")" alt=""></div>
+        <div class="main_text">
+            @foreach (var m in Model)
+            {
+                <div class="text">
+                    <h3 class="t_title">@m.Title</h3>
+                    <ul>
+                        @foreach (var n in m.Products)
+                        {
+                            <li><span></span><a href="@Url.GetRootPath(n.FileUrl)">@n.Title</a></li>
+                        }                        
+                    </ul>
+                </div>
+            }
+        </div>
+    </section>
+    <footer>
+        <div class="f_img"><img src="@Url.GetRootPath("/Content/images/f_bg.png")" alt="" style="margin-bottom: -7px;"></div>
+        <div class="ewm_img"><img src="@Url.GetRootPath("/Content/images/erweima.png")" alt=""></div>
+    </footer>
 </body>
 </html>
 
