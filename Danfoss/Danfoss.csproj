@@ -190,6 +190,7 @@
     <Compile Include="Entity\Customer.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\CustomerService.cs" />
     <Compile Include="Entity\Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
