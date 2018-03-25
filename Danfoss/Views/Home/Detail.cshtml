@@ -48,8 +48,8 @@
                                 <p>@item.SubTitle</p>
                             </div>
                             <div class="hui-media-right hui-form-radios">
-                                <button type="button" class="button button-red">预览</button>
-                                <input type="checkbox" value="@item.Id" name="c1" id="c@(item.Id)" data-title="@item.Title" data-url="@Url.Download(item.FileUrl)" /><label for="c@(item.Id)"></label>
+                                <button type="button" class="button button-red btnPreview" data-url="@Url.Download(item.FileUrl)">预览</button>
+                                <input type="checkbox" value="@item.Id" name="c1" id="c@(item.Id)" data-title="@item.Title" data-url="@item.FileUrl" /><label for="c@(item.Id)"></label>
                             </div>
                         </li>
                     }
@@ -66,20 +66,31 @@
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script type="text/javascript">
         hui('#downloadbtn').click(function () {
+            var checked = $(".hui-media-list input[name=c1]:checked");
+            if (checked.length == 0) {
+                hui.alert("请勾选需要下载的资料");
+                return false;
+            }
             hui.prompt('请填写您的邮箱<br/>文件将发送至您的邮箱', ['取消', '确定'], function (val) {
                 console.log('您输入了 :' + val);
-                var checked = $(".hui-media-list input[name=c1]:checked");
-                if (checked.length == 0) {
-                    return;
+                if (val == "") {
+                    alert("请输入您的邮箱");
+                    return false;
+                }
+                var reg = /^([a-zA-Z0-9_-])+@@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+                if (!reg.test(val)) {
+                    alert("邮箱格式不正确");
+                    return false;
                 }
                 var ckb_value = [];
                 checked.each(function () {
                     ckb_value.push({ Title: $(this).data("title"), FileUrl: $(this).data("url") });
                 });
+                var solutions = [];
                 var solution = {};
                 solution.Title = "@Model.Title";
                 solution.Products = ckb_value;
-                var solutions = [solution];
+                solutions.push(solution);
                 $.ajax({
                     url: "@Url.Action("SendEmail")",
                     type: "post",
@@ -93,6 +104,10 @@
             }, '例如 : 123456@qq.com', '', function () {
                 console.log('您点击了取消')
             });
+        });
+
+        hui('.btnPreview').click(function () {
+            location.href = $(this).data("url");
         });
     </script>
 </body>
