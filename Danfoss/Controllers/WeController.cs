@@ -1,6 +1,7 @@
 ﻿using Danfoss.Core;
 using Danfoss.Core.Utilities;
 using Danfoss.Core.We;
+using Danfoss.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,13 @@ namespace Danfoss.Controllers
         // GET: We
         public ActionResult Index()
         {
+            #region 微信用户认证
+            Customer customer = null;
+            var actionResult = WeOAuth(out customer, Url.Action("Index"));
+            if (actionResult != null)
+                return actionResult;
+            #endregion
+
             return View();
         }
 
@@ -50,7 +58,7 @@ namespace Danfoss.Controllers
             catch (Exception ex)
             {
                 Lgr.Log.Error(ex.Message, ex);
-               // _logService.RecordLog("", "", LogLevel.Debug, "微信事件", ex.Message + "\r\n详细错误：" + ex.StackTrace);
+                // _logService.RecordLog("", "", LogLevel.Debug, "微信事件", ex.Message + "\r\n详细错误：" + ex.StackTrace);
             }
             return Content(result);
         }
@@ -77,7 +85,7 @@ namespace Danfoss.Controllers
             sin.Read(readBytes, 0, readBytes.Length);
             var inputXml = Encoding.UTF8.GetString(readBytes);
 
-            Lgr.Log.Debug("微信事件："+inputXml);
+            Lgr.Log.Debug("微信事件：" + inputXml);
 
             //使用XMLDocument加载信息结构
             var xmlDoc = new XmlDocument();
@@ -134,7 +142,7 @@ namespace Danfoss.Controllers
         /// <returns>响应电文</returns>
         private string HandleSubscribe(Dictionary<string, string> fields)
         {
-            var returnXml = string.Empty;          
+            var returnXml = string.Empty;
 
             return returnXml;
         }
@@ -179,7 +187,7 @@ namespace Danfoss.Controllers
                 //        if (coupon != null) //发券成功后，给微信用户发送消息
                 //            WeHelper.SendMessage(customer.WeAccount, string.Format("您获得了{0}{1}元，可以在预定酒店的时候使用!", coupon.CouponName, FormatHelper.ShowMoney(coupon.CouponAmount)));
                 //    }
-                    //#endregion
+                //#endregion
                 //}
             }
             catch (Exception ex)
@@ -227,7 +235,7 @@ namespace Danfoss.Controllers
             }
             catch (Exception ex)
             {
-               // _logService.Error("处理用户发送文本消息事件出错", ex);
+                // _logService.Error("处理用户发送文本消息事件出错", ex);
             }
 
             if (string.IsNullOrEmpty(returnXml))

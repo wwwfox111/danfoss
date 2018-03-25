@@ -62,9 +62,9 @@ namespace Danfoss.Core
                 if (environment != null && environment != "")
                 {
                     if (environment == SiteEnvironment.UAT.ToString()) // (测试环境)
-                        appId = "wxfdd692381aacf136";
+                        appId = "wx6fb80f8e8ecd51a7";
                     else if (environment == SiteEnvironment.PRO.ToString()) // (正式环境)
-                        appId = "wxeafc2c148a9db384";
+                        appId = "wx6fb80f8e8ecd51a7";
                 }
                 return appId;
             }
@@ -82,9 +82,9 @@ namespace Danfoss.Core
                 if (environment != null && environment != "")
                 {
                     if (environment == SiteEnvironment.UAT.ToString()) // (测试环境)
-                        appSecret = "91c8d3c5e02627a6409a7775263ecc8a";
+                        appSecret = "d2601a8cc004cd4213b8af68206f6faf";
                     else if (environment == SiteEnvironment.PRO.ToString()) // (正式环境)
-                        appSecret = "2b712e86f8aabe9640fe6a72576effa9";
+                        appSecret = "d2601a8cc004cd4213b8af68206f6faf";
                 }
                 return appSecret;
             }

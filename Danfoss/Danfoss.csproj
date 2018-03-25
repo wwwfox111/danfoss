@@ -161,6 +161,28 @@
     <Content Include="Content\js\hui-water-fall.js" />
     <Content Include="Content\js\hui.js" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\solution\img1001%402x.png" />
+    <Content Include="Content\solution\img1001%403x.png" />
+    <Content Include="Content\solution\img1002%402x.png" />
+    <Content Include="Content\solution\img1002%403x.png" />
+    <Content Include="Content\solution\img1003%402x.png" />
+    <Content Include="Content\solution\img1003%403x.png" />
+    <Content Include="Content\solution\img1004%402x.png" />
+    <Content Include="Content\solution\img1004%403x.png" />
+    <Content Include="Content\solution\img1005%402x.png" />
+    <Content Include="Content\solution\img1005%403x.png" />
+    <Content Include="Content\solution\img1006%402x.png" />
+    <Content Include="Content\solution\img1006%403x.png" />
+    <Content Include="Content\solution\img1008%402x.png" />
+    <Content Include="Content\solution\img1008%403x.png" />
+    <Content Include="Content\solution\img1009%402x.png" />
+    <Content Include="Content\solution\img1009%403x.png" />
+    <Content Include="Content\solution\img1010%402x.png" />
+    <Content Include="Content\solution\img1010%403x.png" />
+    <Content Include="Content\solution\img1011%402x.png" />
+    <Content Include="Content\solution\img1011%403x.png" />
+    <Content Include="Content\solution\img1012%402x.png" />
+    <Content Include="Content\solution\img1012%403x.png" />
     <Content Include="Entity\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
@@ -190,6 +212,7 @@
     <Compile Include="Entity\Customer.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\CustomerService.cs" />
     <Compile Include="Entity\Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

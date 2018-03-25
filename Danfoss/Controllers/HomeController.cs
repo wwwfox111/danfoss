@@ -18,6 +18,13 @@ namespace Danfoss.Controllers
         // GET: Home
         public ActionResult Index()
         {
+
+            #region 微信认证 
+            //Customer customer = null;
+            //var actionResult = WeOAuth(out customer, Url.Action("Index"));
+            //if (actionResult != null)
+            //    return actionResult;
+            #endregion 
             //using (DanfossDbEntities db = new DanfossDbEntities())
             //{
             //    var list = db.Customer.AsNoTracking().ToList();
@@ -30,9 +37,10 @@ namespace Danfoss.Controllers
 
         public ActionResult Test()
         {
-            var data = LocalDataProvider.Current.GetAll();
-            var str = WebHelper.GetViewHtml(this.ControllerContext, "~/Views/Shared/EmailTemplate.cshtml", data.Solutions);
-            return Content(str);
+            //var data = LocalDataProvider.Current.GetAll();
+            //var str = WebHelper.GetViewHtml(this.ControllerContext, "~/Views/Shared/EmailTemplate.cshtml", data.Solutions);
+            //return Content(str);
+            return View();
         }
 
         [ValidateInput(false)]
