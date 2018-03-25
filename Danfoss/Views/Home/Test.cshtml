@@ -10,6 +10,7 @@
     <textarea id="txtContent"></textarea>
 
     <input type="button" value="提交" id="btnSubmit" />
+    <input type="button" value="导出" id="btnExport" />
 </div>   
 
 <a href="weixin://contacts/profile/gh_34bd692a9835">点击关注我吧</a>
@@ -31,6 +32,10 @@
                     }
                 })
             });
+            //导出
+            $("#btnExport").click(function () {
+                window.open("@Url.Action("ExportUserInfo")");
+            })
         })
     </script>
 }
