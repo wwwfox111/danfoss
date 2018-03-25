@@ -68,7 +68,7 @@
         hui('#downloadbtn').click(function () {
             var checked = $(".hui-media-list input[name=c1]:checked");
             if (checked.length == 0) {
-                hui.alert("请勾选需要下载的资料");
+                hui.toast('请勾选需要下载的资料', 2000);
                 return false;
             }
             hui.prompt('请填写您的邮箱<br/>文件将发送至您的邮箱', ['取消', '确定'], function (val) {
@@ -99,6 +99,8 @@
                         utils.msg('发送成功', '邮件已发送至您的邮箱<br/>请注意查收', '关闭', function () {
                             console.log('关闭了提示框')
                         })
+                        //关闭输入弹框
+                        hui.dialogClose();
                     }
                 })
             }, '例如 : 123456@qq.com', '', function () {

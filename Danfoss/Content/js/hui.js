@@ -1416,7 +1416,7 @@ var hui = function (selector) {
 			if (callBack) {
 				callBack(document.getElementById("hui-dialog-input").value);
 			}
-			hui.dialogClose();
+			//hui.dialogClose();
 		};
 	};
 	/* loading */

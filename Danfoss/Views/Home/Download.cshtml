@@ -1,78 +1,117 @@
 ﻿@using Danfoss.Extensions
-    @{
-        Layout = null;
-        var data = Danfoss.Data.LocalDataProvider.Current.GetAll();
-    }
-    <!DOCTYPE html>
-    <html>
+@{
+    Layout = null;
+    var data = Danfoss.Data.LocalDataProvider.Current.GetAll();
+}
+<!DOCTYPE html>
+<html>
 
-    <head>
-        <meta charset="utf-8">
-        <meta id="viewport" name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no; viewport-fit=cover">
-        <title>丹佛斯资料下载</title>
-        <link rel="stylesheet" type="text/css" href="/content/css/hui.css" />
-        <link rel="stylesheet" href="/content/css/main.css">
-        <script src="/content/js/flexible.min.js"></script>
-    </head>
+<head>
+    <meta charset="utf-8">
+    <meta id="viewport" name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no; viewport-fit=cover">
+    <title>丹佛斯资料下载</title>
+    <link rel="stylesheet" type="text/css" href="/content/css/hui.css" />
+    <link rel="stylesheet" href="/content/css/main.css">
+    <script src="/content/js/flexible.min.js"></script>
+</head>
 
-    <body>
-        <div class="container">
-            <header class="header">
-                <div class="btn-left"></div>
-                <a href="/" class="btn-right-home"></a>
-                <div class="dropdown">
-                    <a href="" class="dropdown-item">
-                        <i class="icon back"></i>查看全部应用
-                    </a>
-                    <a href="" class="dropdown-item">
-                        <i class="icon download"></i>下载全部资料
-                    </a>
-                </div>
-            </header>
-            <div class="hui-wrap">
-                <div class="title">
-                    选择你希望收到的资料
-                </div>
-                <div class="checkbox-group">
-                    @foreach (var solution in data.Solutions)
-                    {
-                        <div class="group-title">
-                            @solution.Title
-                        </div>
-                        <div class="group-box">
-                            @foreach (var item in solution.Products)
-                            {
-                                <div class="hui-form-radios">
-                                    <input type="checkbox" value="@item.Id" name="c1" id="c@(item.Id)" data-title="@item.Title" data-url="@item.FileUrl"  />
-                                    <label for="c@(item.Id)">@item.Title</label>
-                                </div>
-                            }
-                        </div>
-                    }
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="btn-left"></div>
+            <a href="/" class="btn-right-home"></a>
+            <div class="dropdown">
+                <a href="" class="dropdown-item">
+                    <i class="icon back"></i>查看全部应用
+                </a>
+                <a href="" class="dropdown-item">
+                    <i class="icon download"></i>下载全部资料
+                </a>
+            </div>
+        </header>
+        <div class="hui-wrap" style="padding-bottom:1.8rem">
+            <div class="title">
+                选择你希望收到的资料
+            </div>
+            <div class="checkbox-group">
+                @foreach (var solution in data.Solutions)
+                {
+                    <div class="group-title">
+                        @solution.Title
+                    </div>
+                    <div class="group-box">
+                        @foreach (var item in solution.Products)
+                        {
+                            <div class="hui-form-radios">
+                                <input type="checkbox" value="@item.Id" name="c1" id="c@(item.Id)" data-title="@item.Title" data-url="@Url.Download(item.FileUrl)" />
+                                <label for="c@(item.Id)">@item.Title</label>
+                            </div>
+                        }
+                    </div>
+                }
 
-                </div>
-                <div class="detail-button">
-                    <button type="button" id="downloadbtn" class="hui-button button-red">发送至邮箱下载</button>
-                </div>
+            </div>
+            <div class="detail-button">
+                <button type="button" id="downloadbtn" class="hui-button button-red">发送至邮箱下载</button>
             </div>
         </div>
+    </div>
 
 
-        <script src="/content/js/hui.js" type="text/javascript" charset="utf-8"></script>
-        <script src="/content/js/hui-form.js"></script>
-        <script type="text/javascript" charset="UTF-8" src="/content/js/common.js"></script>
-        <script type="text/javascript">
-            hui('#downloadbtn').click(function () {
-                hui.prompt('请填写您的邮箱<br/>文件将发送至您的邮箱', ['取消', '确定'], function (val) {
-                    console.log('您输入了 :' + val);
-                    utils.msg('发送成功', '邮件已发送至您的邮箱<br/>请注意查收', '关闭', function () {
-                        console.log('关闭了提示框')
-                    })
-                }, '例如 : 123456@qq.com', '', function () {
-                    console.log('您点击了取消')
+    <script src="/content/js/hui.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/content/js/hui-form.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="/content/js/common.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        hui('#downloadbtn').click(function () {
+            var checked = $(".hui-wrap input[name=c1]:checked");
+            if (checked.length == 0) {
+                hui.toast('请勾选需要下载的资料', 2000);
+                return false;
+            }
+            hui.prompt('请填写您的邮箱<br/>文件将发送至您的邮箱', ['取消', '确定'], function (val) {
+                console.log('您输入了 :' + val);
+                if (val == "") {
+                    hui.toast('请输入您的邮箱', 2000);
+                    return false;
+                }
+                var reg = /^([a-zA-Z0-9_-])+@@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+                if (!reg.test(val)) {
+                    hui.toast('邮箱格式不正确', 2000);
+                    return false;
+                }
+                //组装对象
+                var solutions = [];
+                $(".hui-wrap .group-box").each(function () {
+                    var ckb = $(this).find("input[name=c1]:checked");
+                    if (ckb.length > 0) {
+                        var solution = {};
+                        solution.Title = $(this).parent().find(".group-title").html();
+                        var ckb_value = [];
+                        ckb.each(function () {
+                            ckb_value.push({ Title: $(this).data("title"), FileUrl: $(this).data("url") });
+                        });
+                        solution.Products = ckb_value;
+                        solutions.push(solution);
+                    }
                 });
+                $.ajax({
+                    url: "@Url.Action("SendEmail")",
+                    type: "post",
+                    data: { emailAddress: val, solutions: solutions},
+                    success: function (data) {
+                        utils.msg('发送成功', '邮件已发送至您的邮箱<br/>请注意查收', '关闭', function () {
+                            console.log('关闭了提示框')
+                        })
+                        //关闭输入弹框
+                        hui.dialogClose();
+                    }
+                })
+            }, '例如 : 123456@qq.com', '', function () {
+                console.log('您点击了取消')
             });
-        </script>
-    </body>
+        });
+    </script>
+</body>
 
 </html>

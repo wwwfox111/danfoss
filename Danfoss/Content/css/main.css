@@ -103,6 +103,81 @@ body {
   .container .banner img {
     width: 100%; }
 
+.container .card {
+  padding: 0.3rem; }
+  .container .card .strong {
+    font-weight: 600;
+    font-size: 0.3rem; }
+  .container .card .small {
+    font-size: 0.24rem; }
+  .container .card .text-right {
+    text-align: right; }
+  .container .card .text-title {
+    color: #e20511;
+    font-size: 0.34rem;
+    display: inline-block;
+    border: 2px solid #e20511;
+    border-radius: 0.3rem;
+    padding: 0rem 0.3rem;
+    margin: 0.1rem 0 0.2rem 0; }
+  .container .card .text-list {
+    margin-bottom: 0.1rem; }
+    .container .card .text-list ul li {
+      font-size: 0.24rem;
+      padding: 0.06rem 0; }
+      .container .card .text-list ul li::before {
+        content: "";
+        display: inline-block;
+        width: 5px;
+        height: 5px;
+        background-color: #e20511;
+        border-radius: 50%;
+        margin-right: 5px;
+        vertical-align: middle; }
+  .container .card .divi {
+    height: 1px;
+    background: #e0e0e0; }
+
+.container .footer-section {
+  padding: 0.3rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: #db020d;
+  background-image: url(../images/footer-bg.jpg);
+  background-size: 100% 100%; }
+  .container .footer-section .qr-code img {
+    width: 1.62rem;
+    height: 1.62rem; }
+  .container .footer-section .qr-code p {
+    font-size: 0.18rem;
+    letter-spacing: 0px;
+    color: #fff; }
+  .container .footer-section .text-wrap {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+    .container .footer-section .text-wrap p {
+      color: #fff;
+      font-size: 0.26rem;
+      line-height: 1.5; }
+    .container .footer-section .text-wrap p + p {
+      font-size: 0.3rem;
+      font-weight: 600; }
+
 .container .footer {
   height: 0.6rem;
   line-height: 0.6rem;
@@ -117,6 +192,10 @@ body {
   z-index: 9999; }
   .container .footer.iphonex {
     padding-bottom: 0.34rem; }
+
+.gray-hr {
+  height: 0.20rem;
+  background: #e0e0e0; }
 
 #hui-water-fall-left,
 #hui-water-fall-right {
@@ -200,7 +279,12 @@ body {
 
 .detail-button {
   text-align: center;
-  margin-top: 1rem; }
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+  background: #fff;
+  position: fixed;
+  width: 100%;
+  bottom: 0rem; }
 
 .hui-button {
   display: inline-block;
