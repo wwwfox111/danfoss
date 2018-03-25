@@ -1,4 +1,5 @@
-﻿
+﻿@using Danfoss.Extensions;
+@model  Danfoss.Models.Solution
 @{
     Layout = null;
 }
@@ -19,19 +20,18 @@
     <div class="container">
         <header class="header">
             <div class="btn-left"></div>
-            <a href="index.html" class="btn-right-home"></a>
             <div class="dropdown">
-                <a href="index.html" class="dropdown-item">
+                <a href="/" class="dropdown-item">
                     <i class="icon back"></i>查看全部应用
                 </a>
-                <a href="download.html" class="dropdown-item">
+                <a href="/download" class="dropdown-item">
                     <i class="icon download"></i>下载全部资料
                 </a>
             </div>
         </header>
         <div class="hui-wrap">
             <div class="banner">
-                <img src="~/content/images/detail-banner@3x.jpg" alt="">
+                <img src="@Url.Img(Model.BigPicUrl)" alt="">
             </div>
             <div class="hui-media-list">
                 <ul>
