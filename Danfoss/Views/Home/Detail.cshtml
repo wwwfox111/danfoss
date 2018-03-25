@@ -46,14 +46,14 @@
                             </div>
                             <div class="hui-media-right hui-form-radios">
                                 <button type="button" class="button button-red">预览</button>
-                                <input type="checkbox" value="@item.Id" name="c1" id="c@(item.Id)" /><label for="c@(item.Id)"></label>
+                                <input type="checkbox" value="@item.Id" name="c1" id="c@(item.Id)" data-title="@item.Title" data-url="@item.FileUrl" /><label for="c@(item.Id)"></label>
                             </div>
                         </li>
                     }
                 </ul>
             </div>
             <div class="detail-button">
-                <a id="btnDownload" class="hui-button button-red">发送至邮箱下载</a>
+                <button type="button" id="downloadbtn" class="hui-button button-red">发送至邮箱下载</button>
             </div>
         </div>
     </div>
@@ -62,30 +62,35 @@
     <script type="text/javascript" charset="UTF-8" src="~/content/js/common.js"></script>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script type="text/javascript">
-        $(function () {
-            $("#btnDownload").click(function () {
+        hui('#downloadbtn').click(function () {
+            hui.prompt('请填写您的邮箱<br/>文件将发送至您的邮箱', ['取消', '确定'], function (val) {
+                console.log('您输入了 :' + val);
                 var checked = $(".hui-media-list input[name=c1]:checked");
                 if (checked.length == 0) {
                     return;
                 }
                 var ckb_value = [];
                 checked.each(function () {
-                    ckb_value.push($(this).val());
+                    ckb_value.push({ Title: $(this).data("title"), FileUrl: $(this).data("url") });
                 });
-                @*$.get('@Url.Action("GetContent", "Home")', { idList: ckb_value },
-                    function (result) {
-                        
-                    });
+                var solution = {};
+                solution.Title = "@Model.Title";
+                solution.Products = ckb_value;
+                var solutions = [solution];
                 $.ajax({
                     url: "@Url.Action("SendEmail")",
                     type: "post",
-                    data: { emailAddress: $("#txtEmail").val(), content: $("#txtContent").val()},
+                    data: { emailAddress: val, solutions: solutions},
                     success: function (data) {
-
+                        utils.msg('发送成功', '邮件已发送至您的邮箱<br/>请注意查收', '关闭', function () {
+                            console.log('关闭了提示框')
+                        })
                     }
-                })*@
+                })                
+            }, '例如 : 123456@qq.com', '', function () {
+                console.log('您点击了取消')
             });
-        })
+        });
     </script>
 </body>
 

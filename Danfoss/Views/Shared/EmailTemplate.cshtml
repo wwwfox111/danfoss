@@ -20,7 +20,7 @@
             <ul>
                 @foreach (var n in m.Products)
                 {
-                    <li><a href="@Url.DownloadUrl(n.FileUrl)"> @n.Title</a></li>
+                    <li><a href="@Url.Download(n.FileUrl)"> @n.Title</a></li>
                 }
             </ul>
         </li>

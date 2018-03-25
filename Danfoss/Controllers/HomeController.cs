@@ -23,8 +23,8 @@ namespace Danfoss.Controllers
             //    var list = db.Customer.AsNoTracking().ToList();
             //    Lgr.Log.Info(JsonConvert.SerializeObject(list));
             //}
-           // MemoryStream ms = QrCodeHelper.RenderQrCode("sdfsadfsdfsa", "H", 20);
-           //return File(ms.ToArray(), "image/jpeg");
+            // MemoryStream ms = QrCodeHelper.RenderQrCode("sdfsadfsdfsa", "H", 20);
+            //return File(ms.ToArray(), "image/jpeg");
             return View();
         }
 
@@ -37,9 +37,10 @@ namespace Danfoss.Controllers
 
         [ValidateInput(false)]
         [HttpPost]
-        public ActionResult SendEmail(string emailAddress,string content)
+        public ActionResult SendEmail(string emailAddress, List<Solution> solutions)
         {
-         var result=   EmailHelper.SendEmail(emailAddress, "丹佛斯资料下载", content);
+            var content = WebHelper.GetViewHtml(this.ControllerContext, "~/Views/Shared/EmailTemplate.cshtml", solutions);
+            var result = EmailHelper.SendEmail(emailAddress, "丹佛斯资料下载", content);
             if (result)
             {
                 #region  保存邮箱地址
@@ -57,7 +58,7 @@ namespace Danfoss.Controllers
 
                 #endregion 
             }
-            return Json(new { IsSuccess=result});
+            return Json(new { IsSuccess = result });
         }
 
 
