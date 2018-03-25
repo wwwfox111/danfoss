@@ -8,7 +8,6 @@ using System.Web.Mvc;
 
 namespace Danfoss
 {
-
     public static class WebHelper
     {
         /// <summary>
