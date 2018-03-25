@@ -102,7 +102,8 @@ namespace Danfoss.Controllers
             var data = LocalDataProvider.Current.FindSolutionById(id);
             var url = Url.Action("Detail", new { id = id });
             url = Request.Url.GetLeftPart(UriPartial.Authority) + url;
-            MemoryStream ms = QrCodeHelper.RenderQrCode(url, "H", pixels);
+            var iconPath = Server.MapPath("/Content/images/logo.jpg");
+            MemoryStream ms = QrCodeHelper.RenderQrCode(url, "H", pixels, iconPath);
             return File(ms.ToArray(), "image/jpeg", DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".jpeg");
         }
 
@@ -110,7 +111,7 @@ namespace Danfoss.Controllers
         /// 导出用户信息 execl 
         /// </summary>
         /// <returns></returns>
-        public FileResult  ExportUserInfo()
+        public FileResult ExportUserInfo()
         {
             var list = CustomerService.GetList();
             if (list != null && list.Count > 0)
@@ -133,11 +134,9 @@ namespace Danfoss.Controllers
                     row["省份"] = item.Province;
                     row["城市"] = item.City;
                     row["邮箱地址"] = item.Email;
-
                     dt.Rows.Add(row);
                 }
                 var ms = ExcelHelper.ExportToExcel(dt);
-                //XmlExcelHelper.DataTableToXmlExcel(dt, "供应商对账单-" + DateTime.Now.ToString("yyyy-MM-dd"), "");
                 return File(ms, "application/vnd.ms-excel", "用户信息-" + DateTime.Now.ToString("yyyy-MM-dd") + ".xls");
             }
             return null;

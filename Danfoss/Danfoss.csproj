@@ -150,6 +150,7 @@
     <Content Include="Content\images\home%403x.png" />
     <Content Include="Content\images\logo%402x.png" />
     <Content Include="Content\images\logo%403x.png" />
+    <Content Include="Content\images\logo.jpg" />
     <Content Include="Content\images\menu%403x.png" />
     <Content Include="Content\images\product-1%403x.jpg" />
     <Content Include="Content\images\product-10%403x.jpg" />

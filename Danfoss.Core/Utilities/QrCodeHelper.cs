@@ -1,6 +1,7 @@
 ﻿using QRCoder;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace Danfoss.Core.Utilities
         /// <param name="level"></param>
         /// <param name="pixelsPerModule"></param>
         /// <returns></returns>
-        public static MemoryStream RenderQrCode(string content, string level,int pixelsPerModule)
+        public static MemoryStream RenderQrCode(string content, string level, int pixelsPerModule, string iconPath = "")
         {
             var stream = new MemoryStream();
             QRCodeGenerator.ECCLevel eccLevel = (QRCodeGenerator.ECCLevel)(level == "L" ? 0 : level == "M" ? 1 : level == "Q" ? 2 : 3);
@@ -31,9 +32,11 @@ namespace Danfoss.Core.Utilities
                 {
                     using (QRCode qrCode = new QRCode(qrCodeData))
                     {
-
-                        var qRCode = qrCode.GetGraphic(pixelsPerModule);
-
+                        Bitmap qRCode = null;
+                        if (string.IsNullOrEmpty(iconPath))
+                            qRCode = qrCode.GetGraphic(pixelsPerModule);
+                        else
+                            qRCode= qrCode.GetGraphic(pixelsPerModule, Color.Black, Color.White, new Bitmap(iconPath));
                         //pictureBoxQRCode.Size = new System.Drawing.Size(pictureBoxQRCode.Width, pictureBoxQRCode.Height);
                         //Set the SizeMode to center the image.
                         qRCode.Save(stream, ImageFormat.Jpeg);
