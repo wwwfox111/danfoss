@@ -137,7 +137,7 @@ DocProject/Help/html
 
 # Click-Once directory
 publish/
-
+dbg
 # Publish Web Output
 *.[Pp]ublish.xml
 *.azurePubxml
@@ -259,3 +259,4 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/Danfoss/Content/download
