@@ -27,7 +27,11 @@ namespace Danfoss
               "download",
               new { controller = "Home", action = "Download" }
               );
-
+            routes.MapRoute(
+                "GenerateQrCode",
+                "GenerateQrCode",
+                new { controller = "Home", action = "GenerateQrCode" }
+                );
 
             routes.MapRoute(
                 name: "Default",
