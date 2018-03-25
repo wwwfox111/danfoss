@@ -233,7 +233,7 @@
     </Compile>
     <Compile Include="Models\ProductSolution.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebHelper.cs" />
+    <Compile Include="Utility\WebHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
