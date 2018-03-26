@@ -48,7 +48,7 @@
                                 <p>@item.SubTitle</p>
                             </div>
                             <div class="hui-media-right hui-form-radios">
-                                <button type="button" class="button button-red btnPreview" data-url="@Url.Download(item.FileUrl)">预览</button>
+                                <a href="@Url.Download(item.FileUrl)" target="_blank" class="button button-red">预览</a>
                                 <input type="checkbox" value="@item.Id" name="c1" id="c@(item.Id)" data-title="@item.Title" data-url="@Url.Download(item.FileUrl)" /><label for="c@(item.Id)"></label>
                             </div>
                         </li>
@@ -112,9 +112,9 @@
             });
         });
 
-        hui('.btnPreview').click(function () {
-            location.href = $(this).data("url");
-        });
+        //hui('.btnPreview').click(function () {
+        //    location.href = $(this).data("url");
+        //});
     </script>
 </body>
 
