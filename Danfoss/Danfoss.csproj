@@ -139,6 +139,15 @@
     <Content Include="Content\css\fonts\iconfont.svg" />
     <Content Include="Content\css\hui.css" />
     <Content Include="Content\css\main.css" />
+    <Content Include="Content\images\12%402x.jpg" />
+    <Content Include="Content\images\1B%402x.jpg" />
+    <Content Include="Content\images\2b%402x.jpg" />
+    <Content Include="Content\images\3A%402x.jpg" />
+    <Content Include="Content\images\3b%402x.jpg" />
+    <Content Include="Content\images\4A%402x.jpg" />
+    <Content Include="Content\images\4b%402x.jpg" />
+    <Content Include="Content\images\6A%402x.jpg" />
+    <Content Include="Content\images\6B%402x.jpg" />
     <Content Include="Content\images\back%403x.png" />
     <Content Include="Content\images\banner%403x.jpg" />
     <Content Include="Content\images\bg2.png" />
@@ -148,6 +157,7 @@
     <Content Include="Content\images\f_bg.png" />
     <Content Include="Content\images\gouxuan%403x.png" />
     <Content Include="Content\images\home%403x.png" />
+    <Content Include="Content\images\lengshuio%402x.jpg" />
     <Content Include="Content\images\logo%402x.png" />
     <Content Include="Content\images\logo%403x.png" />
     <Content Include="Content\images\logo.jpg" />
@@ -165,6 +175,7 @@
     <Content Include="Content\images\product-8%403x.jpg" />
     <Content Include="Content\images\product-9%403x.jpg" />
     <Content Include="Content\images\product-pic%403x.png" />
+    <Content Include="Content\images\shangyong%402x.jpg" />
     <Content Include="Content\images\weixuanze%403x.png" />
     <Content Include="Content\js\cities.js" />
     <Content Include="Content\js\common.js" />

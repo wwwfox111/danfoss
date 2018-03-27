@@ -17,12 +17,12 @@ namespace Danfoss.Extensions
 
         public static string Solution(this UrlHelper helper, int id)
         {
-            return string.Format("solution/detail/{0}", id);
+            return string.Format("/solution/detail/{0}", id);
         }
 
         public static string Download(this UrlHelper helper, string file)
         {
-            return string.Format("/content/download/{0}", file);
+            return  string.Format("/content/download/{0}", file);
 
             //return string.Format("/content/download/{0}", helper.RequestContext.HttpContext.Server.UrlEncode(file));
         }
