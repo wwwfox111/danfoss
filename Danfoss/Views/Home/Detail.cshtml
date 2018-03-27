@@ -66,6 +66,7 @@
     <script type="text/javascript" charset="UTF-8" src="~/content/js/common.js"></script>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script type="text/javascript">
+        var isSend = true;
         hui('#downloadbtn').click(function () {
             var checked = $(".hui-media-list input[name=c1]:checked");
             if (checked.length == 0) {
@@ -92,22 +93,31 @@
                 solution.Title = "@Model.Title";
                 solution.Products = ckb_value;
                 solutions.push(solution);
-                $.ajax({
-                    url: "@Url.Action("SendEmail")",
-                    type: "post",
-                    data: { emailAddress: val, solutions: solutions},
-                    success: function (data) {
-                        if (data.IsSuccess) {
-                            utils.msg('发送成功', '邮件已发送至您的邮箱<br/>请注意查收', '关闭', function () {
-                                console.log('关闭了提示框')
-                            })
-                            //关闭输入弹框
-                            hui.dialogClose();
-                        } else {
-                            hui.toast('邮件发送失败，请重试', 2000);
+                if (isSend) {
+                    $.ajax({
+                        url: "@Url.Action("SendEmail")",
+                        type: "post",
+                        data: { emailAddress: val, solutions: solutions },
+                        dataType: "json",
+                        beforeSend: function () {
+                            isSend = false;
+                        },
+                        success: function (data) {
+                            if (data.IsSuccess) {
+                                utils.msg('发送成功', '邮件已发送至您的邮箱<br/>请注意查收', '关闭', function () {
+                                    console.log('关闭了提示框')
+                                })
+                                //关闭输入弹框
+                                hui.dialogClose();
+                            } else {
+                                hui.toast('邮件发送失败，请重试', 2000);
+                            }
+                        },
+                        complete: function () {
+                            isSend = true;
                         }
-                    }
-                })
+                    });
+                }
             }, '例如 : 123456@qq.com', '', function () {
                 console.log('您点击了取消')
             });
