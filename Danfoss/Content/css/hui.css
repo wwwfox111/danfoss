@@ -65,7 +65,7 @@ textarea{resize:none; background:inherit;}
 .hui-list-info *{color:#999; font-size:13px;}
 .hui-list li:last-child .hui-list-text, .hui-list > a:last-child .hui-list-text{border:0;}
 /* media list */
-.hui-media-list{}
+.hui-media-list{padding-bottom: 1rem;}
 .hui-media-list li{display:flex; padding:8px; margin-bottom:10px; background:#FFFFFF; overflow:hidden; justify-content:space-between;}
 .hui-media-list li a{padding:0px; display:flex; width:100%; overflow:hidden; justify-content:space-between;}
 .hui-media-list .hui-media-list-img{width:25%; font-size:0px;}
