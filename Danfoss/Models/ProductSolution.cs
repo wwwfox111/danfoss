@@ -10,6 +10,8 @@ namespace Danfoss.Models
     public class SolutionData
     {
         public List<Solution> Solutions { get; set; } = new List<Solution>();
+
+        public List<Solution> All { get; set; } = new List<Solution>();
     }
 
 
