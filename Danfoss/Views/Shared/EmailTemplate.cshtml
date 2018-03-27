@@ -111,7 +111,7 @@
                     <ul>
                         @foreach (var n in m.Products)
                         {
-                            <li><span></span><a href="@Url.Download(n.FileUrl)">@n.Title</a></li>
+                            <li><span></span><a href="@Url.GetRootPath(n.FileUrl)">@n.Title</a></li>
                         }                        
                     </ul>
                 </div>
