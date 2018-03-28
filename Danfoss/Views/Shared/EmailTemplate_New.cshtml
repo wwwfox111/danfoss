@@ -1,0 +1,76 @@
+﻿@model  List<Solution>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta id="viewport" name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no; viewport-fit=cover">
+    <title>HUI</title>
+    <link rel="stylesheet" type="text/css" href="@Url.GetRootPath("/content/css/hui.css")" />
+    <link rel="stylesheet" href="@Url.GetRootPath("/content/css/main.css")">
+    <script src="@Url.GetRootPath("/content/js/flexible.min.js")"></script>
+</head>
+
+<body>
+    <div class="container spec-style">
+        <header class="header spec-header">
+            <div>
+                <p>ENGINEERING</p>
+                <p>TOMORROW</p>
+            </div>
+        </header>
+        <div class="hui-wrap">
+            <div class="banner">
+                <img src="@Url.GetRootPath("/contentimages/spec-banner.jpg")" alt="">
+            </div>
+            <div class="card">
+                <p class="strong">您好：</p>
+                <p class="strong">根据您之前的选择，以下是相关的丹佛斯资料。</p>
+                <p class="strong">请点击资料标题，即可查看更多细节。</p>
+                <p class="small text-right">感谢您的支持，丹佛斯中国</p>
+            </div>
+            <div class="gray-hr"></div>
+            <div class="card">
+                @foreach (var m in Model)
+                {
+                    <div class="text-title">@m.Title</div>
+                    <div class="text-list">
+                        <ul>
+                            @foreach (var n in m.Products)
+                            {
+                                <li><span></span><a href="@Url.GetRootPath(n.FileUrl)">@n.Title</a></li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="divi"></div>
+                }
+
+           </div>
+            <div class="gray-hr"></div>
+            <div class="footer-section">
+                <div class="qr-code">
+                    <img src="@Url.GetRootPath("/content/images/qr-code@3x.png")" alt="">
+                    <p>微信号：DanfossChina</p>
+                </div>
+                <div class="text-wrap">
+                    <p>关注“丹佛斯”，我们与您一起</p>
+                    <p>创想于行，未来于心</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            关于隐私：丹佛斯不收集您的任何个人信息，您的邮箱仅用于本次发送产品资料。
+        </div>
+    </div>
+    <script src="@Url.GetRootPath("/content/js/hui.js")" type="text/javascript" charset="utf-8"></script>
+    <script src="@Url.GetRootPath("/content/js/hui-form.js")"></script>
+    <script type="text/javascript" charset="UTF-8" src="@Url.GetRootPath("/content/js/common.js")"></script>
+    <script type="text/javascript">
+    </script>
+</body>
+
+</html>
