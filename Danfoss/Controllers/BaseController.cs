@@ -79,7 +79,7 @@ namespace Danfoss.Controllers
                 string code = HttpContext.Request.Cookies["code"] != null ? HttpContext.Request.Cookies["code"].Value.ToString() : "";
                 Lgr.Log.Info(string.Format("WeOAuth认证时 HttpContext.Request.Cookie:{0},用户IP:{1}", code, HttpContext.Request.UserHostAddress));
                 if (string.IsNullOrEmpty(code))
-                    return Redirect(string.Format("https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope=snsapi_base&state=1#wechat_redirect",
+                    return Redirect(string.Format("https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect",
                         Constants.AppId, Constants.SiteDomain + actionUrl));
 
                 #region 获取微信用户信息
@@ -105,7 +105,7 @@ namespace Danfoss.Controllers
                         }
                         else
                         {
-                            return Redirect("");
+                            return RedirectToAction("FollowQrCode");
                         }
                         #endregion
                     }
