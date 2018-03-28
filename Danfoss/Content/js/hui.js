@@ -1359,7 +1359,10 @@ var hui = function (selector) {
 	};
 	_hui.dialogClose = function () {
 		document.body.removeChild(hui.dialogDom);hui.maskHide();
-	};
+    };
+    _hui.dialogOpen = function () {
+        document.body.appendChild(hui.dialogDom); hui.maskShow();
+    };
 	_hui.dialogCallBack = null;
 	_hui.alert = function (msg, btnName, callBack) {
 		hui.dialogCallBack = callBack;

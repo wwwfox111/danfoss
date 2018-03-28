@@ -153,6 +153,8 @@
                         solutions.push(solution);
                     }
                 });
+                //关闭输入弹框
+                hui.dialogClose();
                 if (isSend) {
                     $.ajax({
                         url: "@Url.Action("SendEmail")",
@@ -161,20 +163,22 @@
                         dataType: "json",
                         beforeSend: function () {
                             isSend = false;
+                            hui.loading("邮件发送中...");
                         },
                         success: function (data) {
                             if (data.IsSuccess) {
                                 utils.msg('发送成功', '邮件已发送至您的邮箱<br/>请注意查收', '关闭', function () {
                                     console.log('关闭了提示框')
                                 })
-                                //关闭输入弹框
-                                hui.dialogClose();
                             } else {
                                 hui.toast('邮件发送失败，请重试', 2000);
+                                //重新打开输入弹框
+                                hui.dialogOpen();
                             }
                         },
                         complete: function () {
                             isSend = true;
+                            hui.closeLoading();
                         }
                     });
                 }
