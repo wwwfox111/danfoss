@@ -123,7 +123,7 @@ namespace Danfoss.Controllers
                     Lgr.Log.Error(ex.Message, ex);                    
                 }
                 #endregion
-            }
+            } 
             else
             {
                 Lgr.Log.Debug(string.Format("Session[WE_ACCOUNT]:{0},actionUrl:{1}", this.CurAccount, actionUrl));

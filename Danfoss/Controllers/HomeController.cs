@@ -22,10 +22,10 @@ namespace Danfoss.Controllers
         {
 
             #region 微信认证 
-            //Customer customer = null;
-            //var actionResult = WeOAuth(out customer, Url.Action("Index"));
-            //if (actionResult != null)
-            //    return actionResult;
+            Customer customer = null;
+            var actionResult = WeOAuth(out customer, Url.Action("Index"));
+            if (actionResult != null)
+                return actionResult;
             #endregion
             //using (DanfossDbEntities db = new DanfossDbEntities())
             //{
@@ -73,12 +73,24 @@ namespace Danfoss.Controllers
 
         public ActionResult Detail(int id)
         {
+            #region 微信认证 
+            Customer customer = null;
+            var actionResult = WeOAuth(out customer, Url.Action("Detail",new { id=id}));
+            if (actionResult != null)
+                return actionResult;
+            #endregion
             var solution = LocalDataProvider.Current.FindSolutionById(id);
             return View(solution);
         }
 
         public ActionResult Download()
         {
+            #region 微信认证 
+            Customer customer = null;
+            var actionResult = WeOAuth(out customer, Url.Action("Download"));
+            if (actionResult != null)
+                return actionResult;
+            #endregion
             return View();
         }
 

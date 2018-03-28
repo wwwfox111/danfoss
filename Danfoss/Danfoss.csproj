@@ -146,11 +146,13 @@
     <Content Include="Content\images\3b%402x.jpg" />
     <Content Include="Content\images\4A%402x.jpg" />
     <Content Include="Content\images\4b%402x.jpg" />
+    <Content Include="Content\images\5%402x.jpg" />
     <Content Include="Content\images\6A%402x.jpg" />
     <Content Include="Content\images\6B%402x.jpg" />
     <Content Include="Content\images\back%403x.png" />
     <Content Include="Content\images\banner%403x.jpg" />
     <Content Include="Content\images\bg2.png" />
+    <Content Include="Content\images\dds%402x.jpg" />
     <Content Include="Content\images\detail-banner%403x.jpg" />
     <Content Include="Content\images\download%403x.png" />
     <Content Include="Content\images\erweima.png" />
