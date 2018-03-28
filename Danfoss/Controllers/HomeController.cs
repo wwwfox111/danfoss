@@ -49,7 +49,7 @@ namespace Danfoss.Controllers
         [HttpPost]
         public ActionResult SendEmail(string emailAddress, List<Solution> solutions)
         {
-            var content = WebHelper.GetViewHtml(this.ControllerContext, "~/Views/Shared/EmailTemplate.cshtml", solutions);
+            var content = WebHelper.GetViewHtml(this.ControllerContext, "~/Views/Shared/EmailTemplate_New.cshtml", solutions);
             var result = EmailHelper.SendEmail(emailAddress, "丹佛斯资料下载", content);
             if (result)
             {
