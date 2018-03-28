@@ -82,9 +82,9 @@ namespace Danfoss.Core
                 if (environment != null && environment != "")
                 {
                     if (environment == SiteEnvironment.UAT.ToString()) // (测试环境)
-                        appSecret = "d2601a8cc004cd4213b8af68206f6faf";
+                        appSecret = "1017daec699694216032b5f08f99d2e2";
                     else if (environment == SiteEnvironment.PRO.ToString()) // (正式环境)
-                        appSecret = "d2601a8cc004cd4213b8af68206f6faf";
+                        appSecret = "1017daec699694216032b5f08f99d2e2";
                 }
                 return appSecret;
             }

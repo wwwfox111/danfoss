@@ -73,6 +73,7 @@ namespace Danfoss.Controllers
 
         public ActionResult Detail(int id)
         {
+            ViewBag.Id = id;
             #region 微信认证 
             Customer customer = null;
             var actionResult = WeOAuth(out customer, Url.Action("Detail",new { id=id}));
@@ -154,7 +155,14 @@ namespace Danfoss.Controllers
             return null;
         }
 
-
+        /// <summary>
+        /// 展示关注二维码页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult FollowQrCode()
+        {
+            return View();
+        }
 
 
     }

@@ -103,6 +103,10 @@ namespace Danfoss.Controllers
                             //数据库中检查微信用户
                             customer = CustomerService.CheckNewWeAccount(userInfo);
                         }
+                        else
+                        {
+                            return Redirect("");
+                        }
                         #endregion
                     }
 
