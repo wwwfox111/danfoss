@@ -12,7 +12,7 @@ namespace Danfoss.Core.Utilities
     /// <summary>
     /// 邮件帮助类
     /// </summary>
-   public static class EmailHelper
+    public static class EmailHelper
     {
         /// <summary>
         /// 发送邮件
@@ -33,7 +33,7 @@ namespace Danfoss.Core.Utilities
             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;//指定电子邮件发送方式
             smtpClient.Host = smtpServer; //指定SMTP服务器
             smtpClient.Credentials = new System.Net.NetworkCredential(mailFrom, userPassword);//用户名和密码
-
+            //smtpClient.Port = 465;
             // 发送邮件设置       
             MailMessage mailMessage = new MailMessage(mailFrom, mailTo); // 发送人和收件人
             mailMessage.Subject = mailSubject;//主题
@@ -43,19 +43,19 @@ namespace Danfoss.Core.Utilities
             mailMessage.Priority = MailPriority.Low;//优先级
 
             // 添加附件
-            string[] files = new string[] {
-                HttpContext.Current.Server.MapPath("~/Content/images/logo@2x.png"),
-                HttpContext.Current.Server.MapPath("/Content/images/bg2.png"),
-                HttpContext.Current.Server.MapPath("~/Content/images/f_bg.png"),
-                HttpContext.Current.Server.MapPath("~/Content/images/erweima.png") };
-            for (int i = 0; i < files.Length; i++)
-            {
-                mailMessage.Attachments.Add(new Attachment(files[i]));
-                mailMessage.Attachments[i].ContentType.Name = "image/png";
-                mailMessage.Attachments[i].ContentId = "pic" + i;
-                mailMessage.Attachments[i].ContentDisposition.Inline = true;
-                mailMessage.Attachments[i].TransferEncoding = System.Net.Mime.TransferEncoding.Base64;
-            }            
+            //string[] files = new string[] {
+            //    HttpContext.Current.Server.MapPath("~/Content/images/logo@2x.png"),
+            //    HttpContext.Current.Server.MapPath("/Content/images/bg2.png"),
+            //    HttpContext.Current.Server.MapPath("~/Content/images/f_bg.png"),
+            //    HttpContext.Current.Server.MapPath("~/Content/images/erweima.png") };
+            //for (int i = 0; i < files.Length; i++)
+            //{
+            //    mailMessage.Attachments.Add(new Attachment(files[i]));
+            //    mailMessage.Attachments[i].ContentType.Name = "image/png";
+            //    mailMessage.Attachments[i].ContentId = "pic" + i;
+            //    mailMessage.Attachments[i].ContentDisposition.Inline = true;
+            //    mailMessage.Attachments[i].TransferEncoding = System.Net.Mime.TransferEncoding.Base64;
+            //}
 
             try
             {
@@ -66,13 +66,13 @@ namespace Danfoss.Core.Utilities
             {
                 return false;
             }
-            finally
-            {
-                for (int i = 0; i < mailMessage.Attachments.Count; i++) //释放资源
-                {
-                    mailMessage.Attachments[i].Dispose();
-                }
-            }
+            //finally
+            //{
+            //    for (int i = 0; i < mailMessage.Attachments.Count; i++) //释放资源
+            //    {
+            //        mailMessage.Attachments[i].Dispose();
+            //    }
+            //}
         }
     }
 }
