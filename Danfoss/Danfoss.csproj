@@ -177,6 +177,7 @@
     <Content Include="Content\images\product-8%403x.jpg" />
     <Content Include="Content\images\product-9%403x.jpg" />
     <Content Include="Content\images\product-pic%403x.png" />
+    <Content Include="Content\images\qrcode.png" />
     <Content Include="Content\images\shangyong%402x.jpg" />
     <Content Include="Content\images\weixuanze%403x.png" />
     <Content Include="Content\js\cities.js" />
@@ -390,6 +391,7 @@
     <Content Include="Views\Home\GenerateQrCode.cshtml" />
     <Content Include="Views\Home\Download.cshtml" />
     <Content Include="Views\Shared\EmailTemplate_New.cshtml" />
+    <Content Include="Views\Home\FollowQrCode.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

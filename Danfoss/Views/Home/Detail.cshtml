@@ -2,8 +2,7 @@
 @{
     Layout = null;
     var url = Request.Url.ToString();
-    var configData = Danfoss.Core.We.WeHelper.GetWxConfigObject(url);
-
+    var configData = Danfoss.Core.We.WeHelper.GetWxConfigObject(url);    
     ViewBag.appId = configData.appId;
     ViewBag.nonceStr = configData.nonceStr;
     ViewBag.signature = configData.signature;
@@ -46,7 +45,7 @@
 				}
 			});
 
-			var url = "@Danfoss.Core.Constants.SiteDomain" + "@Url.Action("Download", "Home")" ;
+			var url = "@Danfoss.Core.Constants.SiteDomain" + "@Url.Action("Detail", "Home",new { id = ViewBag.Id })";
 			var Imgurl = '@Danfoss.Core.Constants.SiteDomain' + '@Url.Content("/Content/images/logo.jpg")';
             var shareTitle = "丹佛斯资料下载";
             var shareDesc = "丹佛斯各应用解决方案资料，小伙伴们快来下载吧~";
@@ -149,6 +148,8 @@
                 solution.Title = "@Model.Title";
                 solution.Products = ckb_value;
                 solutions.push(solution);
+                //关闭输入弹框
+                hui.dialogClose();
                 if (isSend) {
                     $.ajax({
                         url: "@Url.Action("SendEmail")",
@@ -157,20 +158,23 @@
                         dataType: "json",
                         beforeSend: function () {
                             isSend = false;
+                            hui.loading("邮件发送中...");
                         },
                         success: function (data) {
                             if (data.IsSuccess) {
                                 utils.msg('发送成功', '邮件已发送至您的邮箱<br/>请注意查收', '关闭', function () {
                                     console.log('关闭了提示框')
                                 })
-                                //关闭输入弹框
-                                hui.dialogClose();
+                                
                             } else {
                                 hui.toast('邮件发送失败，请重试', 2000);
+                                //重新打开输入弹框
+                                hui.dialogOpen();
                             }
                         },
                         complete: function () {
                             isSend = true;
+                            hui.closeLoading();
                         }
                     });
                 }

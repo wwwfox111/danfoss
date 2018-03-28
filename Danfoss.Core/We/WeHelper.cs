@@ -181,36 +181,39 @@ namespace Danfoss.Core.We
             //获取用户详细信息 参看：http://mp.weixin.qq.com/wiki/14/bb5031008f1494a59c6f71fa0f319c66.html
             var url = string.Format("https://api.weixin.qq.com/cgi-bin/user/info?access_token={0}&openid={1}&lang=zh_CN", accessToken, openId);
             var json = HttpHelper.Get(url);
-            var dic = JsonHelper.ConvertToDictionary(json);
+            Lgr.Log.Debug(string.Format("请求地址：{0}，GetUserInfo返回结果：{1}", url, json));
+            //var dic = JsonHelper.ConvertToDictionary(json);
 
             //获取失败将返回错误码 {"errcode":40013,"errmsg":"invalid appid"}
-            if (dic.ContainsKey("errmsg"))
+            if (json.Contains("errmsg"))
                 throw new Exception("获取微信用户信息失败。接口返回：" + json);
 
             var userInfo = new UserInfo();
-            userInfo.Subscribe = dic["subscribe"] == "1";
-            if (userInfo.Subscribe) //用户必须关注公众号才能获取到用户其他信息
-            {
-                userInfo.OpenId = dic["openid"];
-                userInfo.NickName = dic["nickname"];
-                userInfo.Sex = dic["sex"];
-                userInfo.Language = dic["language"];
-                userInfo.City = dic["city"];
-                userInfo.Province = dic["province"];
-                userInfo.Country = dic["country"];
-                userInfo.HeadImgUrl = dic["headimgurl"];
-                userInfo.SubscribeTime = dic["subscribe_time"];
-                //userInfo.UnionId = dic["unionid"];
-                userInfo.Remark = dic["remark"];
-                userInfo.GroupId = dic["groupid"];
+            userInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<UserInfo>(json);
+            Lgr.Log.Info("userInfo" + Newtonsoft.Json.JsonConvert.SerializeObject(userInfo));
+            //userInfo.Subscribe = dic["subscribe"] == "1";
+            //if (userInfo.Subscribe) //用户必须关注公众号才能获取到用户其他信息
+            //{
+            //    userInfo.OpenId = dic["openid"];
+            //    userInfo.NickName = dic["nickname"];
+            //    userInfo.Sex = dic["sex"];
+            //    userInfo.Language = dic["language"];
+            //    userInfo.City = dic["city"];
+            //    userInfo.Province = dic["province"];
+            //    userInfo.Country = dic["country"];
+            //    userInfo.HeadImgUrl = dic["headimgurl"];
+            //    userInfo.SubscribeTime = dic["subscribe_time"];
+            //    //userInfo.UnionId = dic["unionid"];
+            //    userInfo.Remark = dic["remark"];
+            //    userInfo.GroupId = dic["groupid"];
 
-                if (userInfo.Sex == "1")
-                    userInfo.Sex = "男";
-                else if (userInfo.Sex == "2")
-                    userInfo.Sex = "女";
-                else
-                    userInfo.Sex = "未知";
-            }
+            //    if (userInfo.Sex == "1")
+            //        userInfo.Sex = "男";
+            //    else if (userInfo.Sex == "2")
+            //        userInfo.Sex = "女";
+            //    else
+            //        userInfo.Sex = "未知";
+            //}
             return userInfo;
         }
 
