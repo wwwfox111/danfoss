@@ -12,7 +12,7 @@ namespace Danfoss.Core.Utilities
     /// <summary>
     /// 邮件帮助类
     /// </summary>
-   public static class EmailHelper
+    public static class EmailHelper
     {
         /// <summary>
         /// 发送邮件
@@ -33,7 +33,7 @@ namespace Danfoss.Core.Utilities
             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;//指定电子邮件发送方式
             smtpClient.Host = smtpServer; //指定SMTP服务器
             smtpClient.Credentials = new System.Net.NetworkCredential(mailFrom, userPassword);//用户名和密码
-
+            smtpClient.Port = 465;
             // 发送邮件设置       
             MailMessage mailMessage = new MailMessage(mailFrom, mailTo); // 发送人和收件人
             mailMessage.Subject = mailSubject;//主题
@@ -55,7 +55,7 @@ namespace Danfoss.Core.Utilities
                 mailMessage.Attachments[i].ContentId = "pic" + i;
                 mailMessage.Attachments[i].ContentDisposition.Inline = true;
                 mailMessage.Attachments[i].TransferEncoding = System.Net.Mime.TransferEncoding.Base64;
-            }            
+            }
 
             try
             {
