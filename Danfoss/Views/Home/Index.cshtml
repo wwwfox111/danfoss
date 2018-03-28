@@ -2,6 +2,13 @@
 @{
     Layout = null;
     var data = Danfoss.Data.LocalDataProvider.Current.GetAll();
+    var url = Request.Url.ToString();
+    var configData = Danfoss.Core.We.WeHelper.GetWxConfigObject(url);
+
+    ViewBag.appId = configData.appId;
+    ViewBag.nonceStr = configData.nonceStr;
+    ViewBag.signature = configData.signature;
+    ViewBag.timestamp = configData.timestamp;
 }
 <!DOCTYPE html>
 <html>
@@ -41,10 +48,61 @@
     <script src="~/content/js/hui-water-fall.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="UTF-8" src="~/content/js/hui-refresh-load-more.js"></script>
     <script type="text/javascript" charset="UTF-8" src="~/content/js/common.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" charset="utf-8"></script>
+    <script type="text/javascript">
+
+		//JS-SDK初始化配置
+		wx.config({
+			debug: false,
+			appId: "@ViewBag.appId",
+			timestamp: "@ViewBag.timestamp",
+			nonceStr: "@ViewBag.nonceStr",
+			signature: "@ViewBag.signature",
+			jsApiList: [
+				'onMenuShareTimeline'
+
+			]
+        });
+        wx.ready(function () {
+            		// 1 判断当前版本是否支持指定 JS 接口，支持批量判断
+			wx.checkJsApi({
+				jsApiList: [
+				  'onMenuShareTimeline'
+				],
+				success: function (res) {
+					//alert(JSON.stringify(res));
+				}
+			});
+
+			var url = "@Danfoss.Core.Constants.SiteDomain" + "@Url.Action("Download", "Home")" ;
+			var Imgurl = '@Danfoss.Core.Constants.SiteDomain' + '@Url.Content("/Content/images/logo.jpg")';
+            var shareTitle = "丹佛斯资料下载";
+            var shareDesc = "丹佛斯各应用解决方案资料，小伙伴们快来下载吧~";
+            //分享到朋友圈接口
+            wx.onMenuShareTimeline({
+                title: shareTitle, // 分享标题
+                link: url, // 分享链接
+                imgUrl: Imgurl, // 分享图标
+                trigger: function () {
+                    //alert("触发点击分享到朋友圈");
+                },
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+
+        })
+
+    </script>
+
+
     <script type="text/javascript">
 		var Waterfall = new huiWaterfall('#HUI_Waterfall');
         var data = new Array();
-        @foreach(var solution in data.Solutions)
+        @foreach (var solution in data.Solutions)
         {
             <text>data.push({title:'@solution.Title',img:'@Url.Img(solution.SmallPicUrl)',url:'@Url.Solution(solution.Id)'});</text>
         }
