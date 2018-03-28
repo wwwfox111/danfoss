@@ -389,6 +389,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Home\GenerateQrCode.cshtml" />
     <Content Include="Views\Home\Download.cshtml" />
+    <Content Include="Views\Shared\EmailTemplate_New.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
