@@ -155,6 +155,7 @@
     <Content Include="Content\images\dds%402x.jpg" />
     <Content Include="Content\images\detail-banner%403x.jpg" />
     <Content Include="Content\images\download%403x.png" />
+    <Content Include="Content\images\email_logo.png" />
     <Content Include="Content\images\erweima.png" />
     <Content Include="Content\images\f_bg.png" />
     <Content Include="Content\images\gouxuan%403x.png" />
