@@ -213,6 +213,8 @@
     <Content Include="Content\solution\img1005%403x.png" />
     <Content Include="Content\solution\img1006%402x.png" />
     <Content Include="Content\solution\img1006%403x.png" />
+    <Content Include="Content\solution\img1007%402x.png" />
+    <Content Include="Content\solution\img1007%403x.png" />
     <Content Include="Content\solution\img1008%402x.png" />
     <Content Include="Content\solution\img1008%403x.png" />
     <Content Include="Content\solution\img1009%402x.png" />
@@ -243,6 +245,8 @@
     <Content Include="Content\solution\img2005%403x.png" />
     <Content Include="Content\solution\img2006%402x.png" />
     <Content Include="Content\solution\img2006%403x.png" />
+    <Content Include="Content\solution\img2007%402x.png" />
+    <Content Include="Content\solution\img2007%403x.png" />
     <Content Include="Content\solution\img2008%402x.png" />
     <Content Include="Content\solution\img2008%403x.png" />
     <Content Include="Content\solution\img2009%402x.png" />
@@ -297,6 +301,8 @@
     <Content Include="Content\solution\img6004%403x.png" />
     <Content Include="Content\solution\img6005%402x.png" />
     <Content Include="Content\solution\img6005%403x.png" />
+    <Content Include="Content\solution\img6006%402x.png" />
+    <Content Include="Content\solution\img6006%403x.png" />
     <Content Include="Content\solution\img7001%402x.png" />
     <Content Include="Content\solution\img7001%403x.png" />
     <Content Include="Content\solution\img7002%402x.png" />
@@ -305,6 +311,10 @@
     <Content Include="Content\solution\img7003%403x.png" />
     <Content Include="Content\solution\img8001%402x.png" />
     <Content Include="Content\solution\img8001%403x.png" />
+    <Content Include="Content\solution\img8002%402x.png" />
+    <Content Include="Content\solution\img8002%403x.png" />
+    <Content Include="Content\solution\img8003%402x.png" />
+    <Content Include="Content\solution\img8003%403x.png" />
     <Content Include="Content\solution\img9001%402x.png" />
     <Content Include="Content\solution\img9001%403x.png" />
     <Content Include="Entity\Model.Context.tt">
