@@ -202,6 +202,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\solution\img10001%402x.png" />
     <Content Include="Content\solution\img10001%403x.png" />
+    <Content Include="Content\solution\img10002%402x.png" />
+    <Content Include="Content\solution\img10002%403x.png" />
     <Content Include="Content\solution\img1001%402x.png" />
     <Content Include="Content\solution\img1001%403x.png" />
     <Content Include="Content\solution\img1002%402x.png" />
@@ -292,6 +294,8 @@
     <Content Include="Content\solution\img5011%403x.png" />
     <Content Include="Content\solution\img5012%402x.png" />
     <Content Include="Content\solution\img5012%403x.png" />
+    <Content Include="Content\solution\img5013%402x.png" />
+    <Content Include="Content\solution\img5013%403x.png" />
     <Content Include="Content\solution\img6001%402x.png" />
     <Content Include="Content\solution\img6001%403x.png" />
     <Content Include="Content\solution\img6002%402x.png" />
