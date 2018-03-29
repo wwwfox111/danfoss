@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta id="viewport" name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no; viewport-fit=cover">
-    <title>HUI</title>
+    <title>丹佛斯资料下载</title>
     <style>
         * {
             margin: 0;
@@ -34,7 +34,7 @@
 
         a {
             color: #000000;
-            text-decoration: none;
+            /*text-decoration: none;*/
             -webkit-tap-highlight-color: rgba(200, 200, 200, 0.2);
         }
 
@@ -106,7 +106,7 @@
                     position: absolute;
                     top: 7.5px;
                     right: 7.5px;
-                    background-image: url(cid:pic0);
+                    background-image: url('@Url.GetRootPath("/Content/images/logo@2x.png")');
                     background-size: 100% 100%;
                     height: 35.5px;
                     width: 85px;
@@ -308,15 +308,6 @@
                 background: #d83133 !important;
                 color: #fff !important;
             }
-
-        .no-style {
-            list-style: none !important;
-        }
-
-        .default-link {
-            color: #000 !important;
-            text-decoration: none !important;
-        }
     </style>
 </head>
 
@@ -330,7 +321,7 @@
         </header>
         <div class="hui-wrap">
             <div class="banner">
-                <img src="cid:pic1" alt="">
+                <img src="@Url.GetRootPath("/Content/images/spec-banner.jpg")" alt="">
             </div>
             <div class="card">
                 <p class="strong">您好：</p>
@@ -355,7 +346,7 @@
             <div class="gray-hr"></div>
             <div class="footer-section">
                 <div class="qr-code">
-                    <img src="cid:pic2" alt="">
+                    <img src="@Url.GetRootPath("/Content/images/qr-code@3x.png")" alt="">
                     <p>微信号：DanfossChina</p>
                 </div>
                 <div class="text-wrap">
