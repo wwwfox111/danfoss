@@ -68,8 +68,9 @@ namespace Danfoss.Controllers
                 var fileName = string.Empty;
                 solutions.ForEach(o =>
                 {
-                    fileName += string.Join(",", o.Products.Select(t => t.FileUrl));
+                    fileName += string.Join(",", o.Products.Select(t => t.FileUrl))+",";
                 });
+                fileName = fileName.Replace("/content/download/", "");
                 CustomerService.AddSendEmailLog(new SendEmailLog
                 {
                     Email = emailAddress,
@@ -186,7 +187,7 @@ namespace Danfoss.Controllers
                     DataRow row = dt.NewRow();
                     row["昵称"] = item.NickName;
                     row["OpenId"] = item.OpenId;
-                    row["地址"] = item.Email;
+                    row["Email地址"] = item.Email;
                     row["发送内容"] = item.SendContent;
                     row["发送时间"] = item.CreateTime.ToString("yyyy-MM-dd HH:mm:ss");
                     dt.Rows.Add(row);
