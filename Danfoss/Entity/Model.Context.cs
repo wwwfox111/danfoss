@@ -27,5 +27,6 @@ namespace Danfoss.Entity
     
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<SendEmailLog> SendEmailLog { get; set; }
+        public virtual DbSet<SharesLog> SharesLog { get; set; }
     }
 }

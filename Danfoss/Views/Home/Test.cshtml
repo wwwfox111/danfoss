@@ -4,14 +4,15 @@
 }
 
 <div>
-    <label>邮箱地址：</label>
+    @*<label>邮箱地址：</label>
     <input type="text" id="txtEmail" />
     <label>发送内容：</label>
     <textarea id="txtContent"></textarea>
 
-    <input type="button" value="提交" id="btnSubmit" />
-    <input type="button" value="导出" id="btnExport" />
+    <input type="button" value="提交" id="btnSubmit" />*@
+    <input type="button" value="导出浏览人数统计" id="btnExport" />
     <input type="button" value="邮件发送日志" id="btnExportSendLog" />
+    <input type="button" value="导出分享统计" id="btnExportSharesLog" />
 </div>   
 
 <a href="weixin://contacts/profile/gh_34bd692a9835">点击关注我吧</a>
@@ -37,9 +38,13 @@
             $("#btnExport").click(function () {
                 window.open("@Url.Action("ExportUserInfo")");
             })
-
+            // 导出发送邮件
             $("#btnExportSendLog").click(function () {
                 window.open("@Url.Action("ExportSendEmailLog")");
+            });
+            //导出分享统计 
+            $("#btnExportSharesLog").click(function () {
+                window.open("@Url.Action("ExportSharesLog")");
             })
         })
     </script>

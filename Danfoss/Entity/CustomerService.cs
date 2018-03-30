@@ -88,9 +88,9 @@ namespace Danfoss.Entity
                 var model = db.Customer.FirstOrDefault(o => o.OpenId == log.OpenId);
                 if (model != null)
                 {
-                    model.Email = log.Email ;
+                    model.Email = log.Email;
                     db.Customer.Attach(model);
-                    db.Entry(model).State = EntityState.Modified;                    
+                    db.Entry(model).State = EntityState.Modified;
                 }
                 db.SendEmailLog.Add(log);
                 db.SaveChanges();
@@ -122,18 +122,80 @@ namespace Danfoss.Entity
             catch (Exception ex)
             {
                 Lgr.Log.Error(ex.Message, ex);
-            }        
+            }
             return result;
         }
+
+        /// <summary>
+        /// 增加分享次数
+        /// </summary>
+        /// <param name="log"></param>
+        public static void AddSharesLog(SharesLog log)
+        {
+            using (var db = new DanfossDbEntities())
+            {
+                var model = db.SharesLog.FirstOrDefault(o => o.OpenId == log.OpenId);
+                if (model != null)
+                {
+                    model.Shares += 1;
+                    db.SharesLog.Attach(model);
+                    db.Entry(model).State = EntityState.Modified;
+                }
+                else
+                {
+                    db.SharesLog.Add(log);
+                }
+                db.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        ///  获取分享列表
+        /// </summary>
+        /// <returns></returns>
+        public static List<SharesLogDto> GetSharesLog()
+        {
+            List<SharesLogDto> result = new List<SharesLogDto>();
+            try
+            {
+                using (var db = new DanfossDbEntities())
+                {
+                    var query = from a in db.SharesLog
+                                join b in db.Customer on a.OpenId equals b.OpenId
+                                select new SharesLogDto
+                                {
+                                    NickName = b.NickName,
+                                    OpenId = a.OpenId,
+                                    Shares = a.Shares
+                                };
+                    result = query.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Lgr.Log.Error(ex.Message, ex);
+            }
+            return result;
+        }
+
     }
 
-    public class SendEmailLogDto
-    {
+        public class SharesLogDto
+        {
 
-        public string NickName { get; set; }
-        public string OpenId { get; set; }
-        public string Email { get; set; }
-        public string SendContent { get; set; }
-        public System.DateTime CreateTime { get; set; }
+            public string NickName { get; set; }
+            public string OpenId { get; set; }
+
+            public int Shares { get; set; }
+        }
+
+        public class SendEmailLogDto
+        {
+
+            public string NickName { get; set; }
+            public string OpenId { get; set; }
+            public string Email { get; set; }
+            public string SendContent { get; set; }
+            public System.DateTime CreateTime { get; set; }
+        }
     }
-}

@@ -30,9 +30,19 @@
           <Property Name="SendContent" Type="nvarchar(max)" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="SharesLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OpenId" Type="nvarchar" MaxLength="50" />
+          <Property Name="Shares" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="DanfossDbModelStoreContainer">
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SendEmailLog" EntityType="Self.SendEmailLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SharesLog" EntityType="Self.SharesLog" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -56,6 +66,7 @@
         <EntityContainer Name="DanfossDbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Customer" EntityType="Self.Customer" />
           <EntitySet Name="SendEmailLog" EntityType="DanfossDbModel.SendEmailLog" />
+          <EntitySet Name="SharesLog" EntityType="DanfossDbModel.SharesLog" />
         </EntityContainer>
         <EntityType Name="SendEmailLog">
           <Key>
@@ -65,6 +76,15 @@
           <Property Name="OpenId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SendContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="SharesLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OpenId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Shares" Type="Int32" Nullable="false" />
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
@@ -95,6 +115,16 @@
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="SendContent" ColumnName="SendContent" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="OpenId" ColumnName="OpenId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SharesLog">
+            <EntityTypeMapping TypeName="DanfossDbModel.SharesLog">
+              <MappingFragment StoreEntitySet="SharesLog">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Shares" ColumnName="Shares" />
                 <ScalarProperty Name="OpenId" ColumnName="OpenId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

@@ -7,6 +7,7 @@
       <Diagram DiagramId="ad9cbb6eb2f94b28983444c9224c298c" Name="Diagram1">
         <EntityTypeShape EntityType="DanfossDbModel.Customer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DanfossDbModel.SendEmailLog" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DanfossDbModel.SharesLog" Width="1.5" PointX="3.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

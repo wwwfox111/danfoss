@@ -68,7 +68,7 @@ namespace Danfoss.Controllers
                 var fileName = string.Empty;
                 solutions.ForEach(o =>
                 {
-                    fileName += string.Join(",", o.Products.Select(t => t.FileUrl))+",";
+                    fileName += string.Join(",", o.Products.Select(t => t.FileUrl)) + ",";
                 });
                 fileName = fileName.Replace("/content/download/", "");
                 CustomerService.AddSendEmailLog(new SendEmailLog
@@ -206,6 +206,45 @@ namespace Danfoss.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 增加分享次数
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult AddSharesLog()
+        {
+            SharesLog sharesLog = new SharesLog() { Shares = 1, CreateTime = DateTime.Now, OpenId = CurAccount };
+            CustomerService.AddSharesLog(sharesLog);
+            return Json(new { IsSuccess = true });
+        }
+        /// <summary>
+        /// 分享链接统计
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ExportSharesLog()
+        {
+            var list = CustomerService.GetSharesLog();
+            if (list != null && list.Count > 0)
+            {
+                DataTable dt = new DataTable();
+                dt.Columns.Add("昵称");
+                dt.Columns.Add("OpenId");
+                dt.Columns.Add("分享次数");
+                foreach (var item in list)
+                {
+                    DataRow row = dt.NewRow();
+                    row["昵称"] = item.NickName;
+                    row["OpenId"] = item.OpenId;
+                    row["分享次数"] = item.Shares;
+                    dt.Rows.Add(row);
+                }
+                var ms = ExcelHelper.ExportToExcel(dt);
+                return File(ms, "application/vnd.ms-excel", "分享链接统计-" + DateTime.Now.ToString("yyyy-MM-dd") + ".xls");
+            }
+            return null;
+        }
+
 
 
     }
