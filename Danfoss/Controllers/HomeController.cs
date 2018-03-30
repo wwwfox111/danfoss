@@ -54,18 +54,29 @@ namespace Danfoss.Controllers
             if (result)
             {
                 #region  保存邮箱地址
-                using (var db = new DanfossDbEntities())
+                //using (var db = new DanfossDbEntities())
+                //{
+                //    var model = db.Customer.FirstOrDefault(o => o.OpenId == CurAccount);
+                //    if (model != null)
+                //    {
+                //        model.Email = emailAddress;
+                //        db.Customer.Attach(model);
+                //        db.Entry(model).State = EntityState.Modified;
+                //        db.SaveChanges();
+                //    }
+                //}
+                var fileName = string.Empty;
+                solutions.ForEach(o =>
                 {
-                    var model = db.Customer.FirstOrDefault(o => o.OpenId == CurAccount);
-                    if (model != null)
-                    {
-                        model.Email = emailAddress;
-                        db.Customer.Attach(model);
-                        db.Entry(model).State = EntityState.Modified;
-                        db.SaveChanges();
-                    }
-                }
-
+                    fileName += string.Join(",", o.Products.Select(t => t.FileUrl));
+                });
+                CustomerService.AddSendEmailLog(new SendEmailLog
+                {
+                    Email = emailAddress,
+                    CreateTime = DateTime.Now,
+                    OpenId = CurAccount,
+                    SendContent = fileName
+                });
                 #endregion 
             }
             return Json(new { IsSuccess = result });
@@ -76,7 +87,7 @@ namespace Danfoss.Controllers
             ViewBag.Id = id;
             #region 微信认证 
             Customer customer = null;
-            var actionResult = WeOAuth(out customer, Url.Action("Detail",new { id=id}));
+            var actionResult = WeOAuth(out customer, Url.Action("Detail", new { id = id }));
             if (actionResult != null)
                 return actionResult;
             #endregion
@@ -151,6 +162,37 @@ namespace Danfoss.Controllers
                 }
                 var ms = ExcelHelper.ExportToExcel(dt);
                 return File(ms, "application/vnd.ms-excel", "用户信息-" + DateTime.Now.ToString("yyyy-MM-dd") + ".xls");
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 导出发送邮件记录
+        /// </summary>
+        /// <returns></returns>
+        public FileResult ExportSendEmailLog()
+        {
+            var list = CustomerService.GetSendEmailLog();
+            if (list != null && list.Count > 0)
+            {
+                DataTable dt = new DataTable();
+                dt.Columns.Add("昵称");
+                dt.Columns.Add("OpenId");
+                dt.Columns.Add("Email地址");
+                dt.Columns.Add("发送内容");
+                dt.Columns.Add("发送时间");
+                foreach (var item in list)
+                {
+                    DataRow row = dt.NewRow();
+                    row["昵称"] = item.NickName;
+                    row["OpenId"] = item.OpenId;
+                    row["地址"] = item.Email;
+                    row["发送内容"] = item.SendContent;
+                    row["发送时间"] = item.CreateTime.ToString("yyyy-MM-dd HH:mm:ss");
+                    dt.Rows.Add(row);
+                }
+                var ms = ExcelHelper.ExportToExcel(dt);
+                return File(ms, "application/vnd.ms-excel", "邮件发送记录-" + DateTime.Now.ToString("yyyy-MM-dd") + ".xls");
             }
             return null;
         }

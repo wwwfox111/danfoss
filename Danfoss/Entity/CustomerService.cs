@@ -1,6 +1,8 @@
-﻿using Danfoss.Core.We;
+﻿using Danfoss.Core.Utilities;
+using Danfoss.Core.We;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -65,7 +67,8 @@ namespace Danfoss.Entity
                     City = userInfo.City,
                     Province = userInfo.Province
                 };
-                using (var db = new DanfossDbEntities()) {
+                using (var db = new DanfossDbEntities())
+                {
                     db.Customer.Add(customer);
                     db.SaveChanges();
                 }
@@ -73,5 +76,64 @@ namespace Danfoss.Entity
             }
             return null;
         }
+
+        /// <summary>
+        ///  增加邮件发送记录 
+        /// </summary>
+        /// <param name="log"></param>
+        public static void AddSendEmailLog(SendEmailLog log)
+        {
+            using (var db = new DanfossDbEntities())
+            {
+                var model = db.Customer.FirstOrDefault(o => o.OpenId == log.OpenId);
+                if (model != null)
+                {
+                    model.Email = log.Email ;
+                    db.Customer.Attach(model);
+                    db.Entry(model).State = EntityState.Modified;                    
+                }
+                db.SendEmailLog.Add(log);
+                db.SaveChanges();
+            }
+        }
+        /// <summary>
+        /// 获取发送邮件列表
+        /// </summary>
+        public static List<SendEmailLogDto> GetSendEmailLog()
+        {
+            List<SendEmailLogDto> result = new List<SendEmailLogDto>();
+            try
+            {
+                using (var db = new DanfossDbEntities())
+                {
+                    var query = from a in db.SendEmailLog
+                                join b in db.Customer on a.OpenId equals b.OpenId
+                                select new SendEmailLogDto
+                                {
+                                    CreateTime = a.CreateTime,
+                                    Email = a.Email,
+                                    NickName = b.NickName,
+                                    OpenId = a.OpenId,
+                                    SendContent = a.SendContent
+                                };
+                    result = query.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Lgr.Log.Error(ex.Message, ex);
+            }        
+            return result;
+        }
+    }
+
+    public class SendEmailLogDto
+    {
+
+        public string NickName { get; set; }
+        public string OpenId { get; set; }
+        public string Email { get; set; }
+        public string SendContent { get; set; }
+        public System.DateTime CreateTime { get; set; }
     }
 }

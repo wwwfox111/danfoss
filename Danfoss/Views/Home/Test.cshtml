@@ -11,6 +11,7 @@
 
     <input type="button" value="提交" id="btnSubmit" />
     <input type="button" value="导出" id="btnExport" />
+    <input type="button" value="邮件发送日志" id="btnExportSendLog" />
 </div>   
 
 <a href="weixin://contacts/profile/gh_34bd692a9835">点击关注我吧</a>
@@ -35,6 +36,10 @@
             //导出
             $("#btnExport").click(function () {
                 window.open("@Url.Action("ExportUserInfo")");
+            })
+
+            $("#btnExportSendLog").click(function () {
+                window.open("@Url.Action("ExportSendEmailLog")");
             })
         })
     </script>

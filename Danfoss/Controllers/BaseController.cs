@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Danfoss.Controllers
 {
-    public class BaseController: Controller
+    public class BaseController : Controller
     {
 
 
@@ -29,11 +29,11 @@ namespace Danfoss.Controllers
             get
             {
                 //return "o9NzmstXQ-Wbbl75iGuUUh5hll5I"; // "orbpLt2PcsB8gIbkkR7f4exf1Hb8";
-//#if DEBUG
-//                return "orbpLt2PcsB8gIbkkR7f4exf1Hb8";  //"orbpLt2PcsB8gIbkkR7f4exf1Hb8 666";
-//#else
-            return Session[_ACCOUNT_KEY]?.ToString(); 
-//#endif
+                //#if DEBUG
+                //                return "orbpLt2PcsB8gIbkkR7f4exf1Hb8";  //"orbpLt2PcsB8gIbkkR7f4exf1Hb8 666";
+                //#else
+                return Session[_ACCOUNT_KEY]?.ToString();
+                //#endif
             }
         }
 
@@ -69,7 +69,7 @@ namespace Danfoss.Controllers
         /// <summary>
         /// 微信用户oauth方式认证
         /// </summary>
-        public ActionResult WeOAuth(out Customer customer, string actionUrl               )
+        public ActionResult WeOAuth(out Customer customer, string actionUrl)
         {
             customer = null;
             if (!this.IsAuthenticated)
@@ -117,17 +117,17 @@ namespace Danfoss.Controllers
                 catch (KeyNotFoundException ex)
                 {
                     Lgr.Log.Error(ex.Message, ex);
-                    Lgr.Log.Info(string.Format("URL:{0}", HttpContext.Request.Url));                    
+                    Lgr.Log.Info(string.Format("URL:{0}", HttpContext.Request.Url));
                     return Redirect(string.Format("https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope=snsapi_base&state=1#wechat_redirect",
                         Constants.AppId, Constants.SiteDomain + actionUrl));
                 }
                 #endregion
                 catch (Exception ex)
                 {
-                    Lgr.Log.Error(ex.Message, ex);                    
+                    Lgr.Log.Error(ex.Message, ex);
                 }
                 #endregion
-            } 
+            }
             else
             {
                 Lgr.Log.Debug(string.Format("Session[WE_ACCOUNT]:{0},actionUrl:{1}", this.CurAccount, actionUrl));
