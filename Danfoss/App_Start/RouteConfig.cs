@@ -32,7 +32,11 @@ namespace Danfoss
                 "GenerateQrCode",
                 new { controller = "Home", action = "GenerateQrCode" }
                 );
-
+            routes.MapRoute(
+              "Export",
+              "Export",
+              new { controller = "Home", action = "Test" }
+              );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
