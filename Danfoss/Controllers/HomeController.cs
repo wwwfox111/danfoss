@@ -12,7 +12,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Data;
 using Danfoss.Core.Utility;
-
+using System.Configuration;
 namespace Danfoss.Controllers
 {
     public class HomeController : BaseController
@@ -70,7 +70,8 @@ namespace Danfoss.Controllers
                 {
                     fileName += string.Join(",", o.Products.Select(t => t.FileUrl)) + ",";
                 });
-                fileName = fileName.Replace("/content/download/", "");
+                fileName = fileName.Replace(ConfigurationManager.AppSettings["DownloadUrl"], "");
+                fileName = fileName.TrimEnd(',');
                 CustomerService.AddSendEmailLog(new SendEmailLog
                 {
                     Email = emailAddress,

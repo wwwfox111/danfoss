@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Configuration;
 
 namespace Danfoss.Extensions
 {
@@ -22,7 +23,8 @@ namespace Danfoss.Extensions
 
         public static string Download(this UrlHelper helper, string file)
         {
-            return  string.Format("/content/download/{0}", file);
+
+            return string.Format("{0}{1}", ConfigurationManager.AppSettings["DownloadUrl"], file);
 
             //return string.Format("/content/download/{0}", helper.RequestContext.HttpContext.Server.UrlEncode(file));
         }
