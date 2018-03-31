@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Configuration;
+using System.Text;
 
 namespace Danfoss.Extensions
 {
@@ -24,7 +25,7 @@ namespace Danfoss.Extensions
         public static string Download(this UrlHelper helper, string file)
         {
 
-            return string.Format("{0}{1}", ConfigurationManager.AppSettings["DownloadUrl"], file);
+            return string.Format("{0}{1}", ConfigurationManager.AppSettings["DownloadUrl"], HttpUtility.UrlEncode(file, Encoding.UTF8).Replace("+", "%20"));
 
             //return string.Format("/content/download/{0}", helper.RequestContext.HttpContext.Server.UrlEncode(file));
         }
