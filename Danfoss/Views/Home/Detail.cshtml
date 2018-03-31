@@ -145,7 +145,7 @@
                             </div>
                             <div class="hui-media-right hui-form-radios">
                                 <a href="@Url.Download(item.FileUrl)" target="_blank" class="button button-red">预览</a>
-                                <input type="checkbox" value="@item.Id" name="c1" id="c@(item.Id)" data-title="@item.Title" data-url="@Url.Download(item.FileUrl)" /><label for="c@(item.Id)"></label>
+                                <input type="checkbox" value="@item.Id" name="c1" id="c@(item.Id)" data-title="@item.Title" data-url="@item.FileUrl" /><label for="c@(item.Id)"></label>
                             </div>
                         </li>
                     }

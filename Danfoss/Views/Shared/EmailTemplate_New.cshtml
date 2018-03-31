@@ -3,358 +3,86 @@
     Layout = null;
 }
 
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta id="viewport" name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no; viewport-fit=cover">
-    <title>丹佛斯资料下载</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            font-size: 15px;
-            color: #000000;
-            outline: none;
-            -webkit-text-size-adjust: 100%;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            font-style: normal;
-            -webkit-tap-highlight-color: transparent;
-            font-family: sans-serif;
+<table style="width:750px;" cellspacing="0" cellpadding="0">
+    <tr style="height:50px;width: 100%;background: #e3000f;">
+        <td align="right" valign="bottom" colspan="2">
+            <img style="height:40px;" src="@Url.GetRootPath("/Content/images/email_logo.png")" alt="logo图片">
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <img style="width:100%;" src="@Url.GetRootPath("/Content/images/spec-banner.jpg")" alt="banner图片">
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <p style="font-weight: 600;font-size: 15px;margin:5px 0">您好：</p>
+            <p style="font-weight: 600;font-size: 15px;margin:5px 0">根据您之前的选择，以下是相关的丹佛斯资料。</p>
+            <p style="font-weight: 600;font-size: 15px;margin:5px 0">请点击资料标题，即可查看更多细节。</p>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td colspan="2" align="right">
+            <p style="font-size: 15px;margin:5px 0">感谢您的支持，丹佛斯中国</p>
+        </td>
+        <td></td>
+    </tr>
+    <tr style="height: 20px; background: #e0e0e0;">
+        <td></td>
+        <td></td>
+    </tr>
+    @foreach (var m in Model)
+    {
+        <tr>
+            <td colspan="2" style="padding-top:10px">
+                <span style="color: #e20511;
+                font-size: 17px;
+                display: inline-block;
+                border: 2px solid #e20511;
+                border-radius: 15px;
+                padding: 0rem 15px;
+                margin: 10px 0 10px 0;">@m.Title</span>
+            </td>
+            <td></td>
+        </tr>
+        foreach (var n in m.Products)
+        {
+            <tr>
+                <td colspan="2">
+                    <span style="    display: inline-block;
+                width: 5px;
+                height: 5px;
+                background-color: #e20511;
+                border-radius: 50%;
+                margin-right: 5px;
+                vertical-align: middle;"></span> <a href="@Url.Download(n.FileUrl)">@n.Title</a>
+                </td>
+                <td></td>
+            </tr>
         }
-
-        div {
-            overflow: hidden;
-        }
-
-        ::-webkit-scrollbar {
-            display: none;
-        }
-
-        a {
-            /*color: #000000;
-            text-decoration: none;*/
-            -webkit-tap-highlight-color: rgba(200, 200, 200, 0.2);
-        }
-
-            a:active {
-                color: #000000;
-            }
-
-        img {
-            border: none;
-        }
-
-        ul {
-            list-style-type: none;
-        }
-
-        body {
-            background: #F0EFF5;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            max-width: 750px;
-        }
-
-        html {
-            font-size: 50px;
-        }
-
-        body {
-            background: #fff;
-            padding-top: constant(safe-area-inset-top);
-            padding-left: constant(safe-area-inset-left);
-            padding-right: constant(safe-area-inset-right);
-            padding-bottom: constant(safe-area-inset-bottom);
-        }
-
-        .container {
-            max-width: 750px;
-        }
-
-            .container .header {
-                height: 50px;
-                width: 100%;
-                background: #e3000f;
-                z-index: 9999;
-                top: 0;
-                left: 0;
-                max-width: 750px;
-                position: relative
-            }
-
-                .container .header .logo-text {
-                    color: #fff;
-                    position: absolute;
-                    right: 90px;
-                    top: 7.5px;
-                }
-
-                    .container .header .logo-text p {
-                        font-size: 12px;
-                        color: #fff;
-                    }
-
-                        .container .header .logo-text p + p {
-                            font-weight: 600
-                        }
-
-                .container .header::before {
-                    content: "";
-                    display: block;
-                    position: absolute;
-                    top: 7.5px;
-                    right: 7.5px;
-                    background-image: url('@Url.GetRootPath("/Content/images/email_logo.png")');
-                    background-size: 100% 100%;
-                    height: 35.5px;
-                    width: 132px;
-                }
-
-            .container .hui-wrap {
-            }
-
-                .container .hui-wrap .title {
-                    font-size: 15px;
-                    color: #333;
-                    font-weight: 600;
-                    padding: 15px;
-                    position: relative;
-                }
-
-                    .container .hui-wrap .title::after {
-                        content: "";
-                        position: absolute;
-                        bottom: 0;
-                        left: 15px;
-                        display: inline-block;
-                        height: 6px;
-                        width: 50px;
-                        background: #aaaaaa;
-                    }
-
-                .container .hui-wrap .checkbox-group {
-                    padding: 7.5px 15px;
-                }
-
-                    .container .hui-wrap .checkbox-group .group-title {
-                        font-size: 15px;
-                        color: #333;
-                        font-weight: 600;
-                        margin: 7.5px 0;
-                    }
-
-                    .container .hui-wrap .checkbox-group .group-box .hui-form-radios {
-                        margin: 0.50px 0;
-                    }
-
-            .container .banner {
-                width: 100%;
-            }
-
-                .container .banner img {
-                    width: 100%;
-                }
-
-            .container .card {
-                padding: 15px;
-            }
-
-                .container .card .strong {
-                    font-weight: 600;
-                    font-size: 15px;
-                }
-
-                .container .card .small {
-                    font-size: 12px;
-                }
-
-                .container .card .text-right {
-                    text-align: right;
-                }
-
-                .container .card .text-title {
-                    color: #e20511;
-                    font-size: 17px;
-                    display: inline-block;
-                    border: 2px solid #e20511;
-                    border-radius: 15px;
-                    padding: 0rem 15px;
-                    margin: 10px 0 10px 0;
-                }
-
-                .container .card .text-list {
-                    margin-bottom: 10px;
-                }
-
-                    .container .card .text-list p {
-                        font-size: 12px;
-                        padding: 3px 0;
-                    }
-
-                        .container .card .text-list p::before {
-                            content: "";
-                            display: inline-block;
-                            width: 5px;
-                            height: 5px;
-                            background-color: #e20511;
-                            border-radius: 50%;
-                            margin-right: 5px;
-                            vertical-align: middle;
-                        }
-
-                .container .card .divi {
-                    height: 1px;
-                    background: #e0e0e0;
-                }
-
-            .container .footer-section {
-                padding: 15px;
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: flex;
-                background: #db020d;
-                background-size: 100% 100%;
-            }
-
-                .container .footer-section .qr-code {
-                    text-align: center
-                }
-
-                    .container .footer-section .qr-code img {
-                        width: 81px;
-                        height: 81px;
-                    }
-
-                    .container .footer-section .qr-code p {
-                        font-size: 9px;
-                        letter-spacing: 0px;
-                        color: #fff;
-                    }
-
-                .container .footer-section .text-wrap {
-                    -webkit-box-flex: 1;
-                    -ms-flex: 1;
-                    flex: 1;
-                    display: -webkit-box;
-                    display: -ms-flexbox;
-                    display: flex;
-                    -webkit-box-orient: vertical;
-                    -webkit-box-direction: normal;
-                    -ms-flex-direction: column;
-                    flex-direction: column;
-                    -webkit-box-align: center;
-                    -ms-flex-align: center;
-                    align-items: center;
-                    -webkit-box-pack: center;
-                    -ms-flex-pack: center;
-                    justify-content: center;
-                }
-
-                    .container .footer-section .text-wrap p {
-                        color: #fff;
-                        font-size: 13px;
-                        line-height: 1.5;
-                    }
-
-                        .container .footer-section .text-wrap p + p {
-                            font-size: 15px;
-                            font-weight: 600;
-                            margin-bottom: 20px;
-                        }
-
-            .container .footer {
-                height: 30px;
-                line-height: 30px;
-                text-align: center;
-                font-size: 9px;
-                color: #fff;
-                width: 100%;
-                bottom: 0;
-                left: 0;
-                background: #b6000f;
-                z-index: 9999;
-                max-width: 750px;
-            }
-
-
-        .gray-hr {
-            height: 20px;
-            background: #e0e0e0;
-        }
-
-
-
-
-        .hui-button {
-            display: inline-block;
-            border-radius: 3px;
-            font-size: 15px;
-            height: 37px;
-            line-height: 37px;
-            outline: 0;
-            -webkit-box-shadow: 0 0 1px #B8BBBF;
-            box-shadow: 0 0 1px #B8BBBF;
-            padding: 0px 37px;
-        }
-
-        .button-red {
-            background: #c50709 !important;
-            color: #fff !important;
-        }
-
-            .button-red:active {
-                background: #d83133 !important;
-                color: #fff !important;
-            }
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <div class="header">
-        </div>
-        <div class="hui-wrap">
-            <div class="banner">
-                <img src="@Url.GetRootPath("/Content/images/spec-banner.jpg")" alt="">
-            </div>
-            <div class="card">
-                <p class="strong">您好：</p>
-                <p class="strong">根据您之前的选择，以下是相关的丹佛斯资料。</p>
-                <p class="strong">请点击资料标题，即可查看更多细节。</p>
-                <p class="small text-right">感谢您的支持，丹佛斯中国</p>
-            </div>
-            <div class="gray-hr"></div>
-            <div class="card">
-                @foreach (var m in Model)
-                {
-                    <div class="text-title">@m.Title</div>
-                    <div class="text-list">
-                        @foreach (var n in m.Products)
-                        {
-                            <p><a href="@Url.GetRootPath(n.FileUrl)">@n.Title</a></p>
-                        }
-                    </div>
-                    <div class="divi"></div>
-                }
-            </div>
-            <div class="gray-hr"></div>
-            <div class="footer-section">
-                <div class="qr-code">
-                    <img src="@Url.GetRootPath("/Content/images/qr-code@3x.png")" alt="">
-                    <p>微信号：DanfossChina</p>
-                </div>
-                <div class="text-wrap">
-                    <p>关注“丹佛斯”，我们与您一起</p>
-                    <p>创想于行，未来于心</p>
-                </div>
-            </div>
-        </div>
-        <div class="footer">
+    }
+    <tr style="height: 20px; background: #e0e0e0;">
+        <td></td>
+        <td></td>
+    </tr>
+    <tr style="height:131px;background-color: #e20511;">
+        <td valign="bottom" style="width:180px;">
+            <span style="display:inline-block;width:180px;text-align:center;margin-left:20px;">
+                <img style="width:81px;height:81px;" src="@Url.GetRootPath("/Content/images/qr-code@3x.png")" alt="二维码">
+                <p style="font-size:12px;color:#fff;margin:5px 0">微信号：DanfossChina</p>
+            </span>
+        </td>
+        <td style="color:#fff;text-align:center">
+            <p>关注“丹佛斯”，我们与您一起</p>
+            <p>创想于行，未来于心</p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="color:#fff;text-align:center;font-size:12px;background: #b6000f;padding:5px 0">
             关于隐私：丹佛斯不收集您的任何个人信息，您的邮箱仅用于本次发送产品资料。
-        </div>
-    </div>
-</body>
-
-</html>
+        </td>
+    </tr>
+</table>

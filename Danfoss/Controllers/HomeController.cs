@@ -70,7 +70,6 @@ namespace Danfoss.Controllers
                 {
                     fileName += string.Join(",", o.Products.Select(t => t.FileUrl)) + ",";
                 });
-                fileName = fileName.Replace(ConfigurationManager.AppSettings["DownloadUrl"], "");
                 fileName = fileName.TrimEnd(',');
                 CustomerService.AddSendEmailLog(new SendEmailLog
                 {

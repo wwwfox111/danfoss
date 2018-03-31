@@ -141,7 +141,7 @@
                         @foreach (var item in solution.Products)
                         {
                             <div class="hui-form-radios">
-                                <input type="checkbox" value="@item.Id" name="c1" id="c@(item.Id)" data-title="@item.Title" data-url="@Url.Download(item.FileUrl)" />
+                                <input type="checkbox" value="@item.Id" name="c1" id="c@(item.Id)" data-title="@item.Title" data-url="@item.FileUrl" />
                                 <label for="c@(item.Id)">@item.Title</label>
                             </div>
                         }
