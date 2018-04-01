@@ -22,7 +22,7 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <td colspan="2">
+                            <td colspan="2" style="padding-left: 20px;">
                                 <p style="font-weight: 600;font-size: 15px;margin:5px 0">您好：</p>
                                 <p style="font-weight: 600;font-size: 15px;margin:5px 0">根据您之前的选择，以下是相关的丹佛斯资料。</p>
                                 <p style="font-weight: 600;font-size: 15px;margin:5px 0">请点击资料标题，即可查看更多细节。</p>
@@ -30,7 +30,7 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <td colspan="2" align="right">
+                            <td colspan="2" align="right" style="padding-right: 20px;">
                                 <p style="font-size: 15px;margin:5px 0">感谢您的支持，丹佛斯中国</p>
                             </td>
                             <td></td>
@@ -39,10 +39,14 @@
                             <td></td>
                             <td></td>
                         </tr>
+                        <tr style="height: 20px;">
+                            <td></td>
+                            <td></td>
+                        </tr>
                         @foreach (var m in Model)
                         {
                             <tr>
-                                <td colspan="2">
+                                <td colspan="2" style="padding-left: 20px;">
                                     <span style="color: #e20511;
                                     font-size: 17px;
                                     display: inline-block;
@@ -56,7 +60,7 @@
                             foreach (var n in m.Products)
                             {
                                 <tr>
-                                    <td colspan="2" style="padding-bottom:10px">
+                                    <td colspan="2" style="padding:0 0 10px 20px">
                                         <span style="display: inline-block;
                                         width: 5px;
                                         height: 5px;
@@ -69,6 +73,10 @@
                                 </tr>
                             }
                         }
+                        <tr style="height: 10px;">
+                            <td></td>
+                            <td></td>
+                        </tr>
                         <tr style="height: 20px; background: #e0e0e0;">
                             <td></td>
                             <td></td>
