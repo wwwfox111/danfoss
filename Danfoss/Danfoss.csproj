@@ -321,6 +321,8 @@
     <Content Include="Content\solution\img8002%403x.png" />
     <Content Include="Content\solution\img8003%402x.png" />
     <Content Include="Content\solution\img8003%403x.png" />
+    <Content Include="Content\solution\img8004%402x.png" />
+    <Content Include="Content\solution\img8004%403x.png" />
     <Content Include="Content\solution\img9001%402x.png" />
     <Content Include="Content\solution\img9001%403x.png" />
     <Content Include="Entity\Model.Context.tt">
