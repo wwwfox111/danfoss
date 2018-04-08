@@ -76,7 +76,7 @@ namespace Danfoss.Controllers
             {
                 //var code = Request["code"];
                 Lgr.Log.Info(string.Format("用户IP:{0} HttpContext.Request.Cookies.Count:{1},UserAgent:{2},UserHostName:{3}", HttpContext.Request.UserHostAddress, HttpContext.Request.Cookies.Count, HttpContext.Request.UserAgent, HttpContext.Request.UserHostName));
-                string code = HttpContext.Request.Cookies["code"] != null ? HttpContext.Request.Cookies["code"].Value.ToString() : "";
+                string code = HttpContext.Request["code"];
                 Lgr.Log.Info(string.Format("WeOAuth认证时 HttpContext.Request.Cookie:{0},用户IP:{1}", code, HttpContext.Request.UserHostAddress));
                 if (string.IsNullOrEmpty(code))
                     return Redirect(string.Format("https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope=snsapi_base&state=1#wechat_redirect",
