@@ -34,5 +34,17 @@ namespace Danfoss.Extensions
         {
             return helper.RequestContext.HttpContext.Request.Url.GetLeftPart(UriPartial.Authority) + path;
         }
+
+        public static string StaticUrl(this UrlHelper helper, string path)
+        {
+            return string.Format("{0}{1}", ConfigurationManager.AppSettings["StaticUrl"], path);
+        }
+
+        public static string StaticImg(this UrlHelper helper, string path, string rootPath = null)
+        {
+            if (string.IsNullOrEmpty(rootPath))
+                return string.Format("{0}/content/images/{1}", ConfigurationManager.AppSettings["StaticUrl"], path);
+            return string.Format("{0}/content/{2}/{1}", ConfigurationManager.AppSettings["StaticUrl"], path, rootPath);
+        }
     }
 }
