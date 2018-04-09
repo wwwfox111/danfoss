@@ -4,7 +4,7 @@
     var data = Danfoss.Data.LocalDataProvider.Current.GetAll();
     var url = Request.Url.ToString();
     var configData = Danfoss.Core.We.WeHelper.GetWxConfigObject(url);
-    
+
     ViewBag.appId = configData.appId;
     ViewBag.nonceStr = configData.nonceStr;
     ViewBag.signature = configData.signature;
@@ -111,6 +111,21 @@
         })
 
     </script>
+    <style type="text/css">
+        .container .footer1 {
+            height: 0.6rem;
+            line-height: 0.6rem;
+            text-align: center;
+            font-size: 0.18rem;
+            color: #000;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            background: #fff;
+            z-index: 9999;
+        }
+    </style>
 </head>
 
 <body>
@@ -149,9 +164,12 @@
                 }
 
             </div>
-            <div class="detail-button">
+            <div class="detail-button" style="bottom: 0.4rem;">
                 <button type="button" id="downloadbtn" class="hui-button button-red">发送至邮箱下载</button>
             </div>
+        </div>
+        <div class="footer1">
+            隐私声明：本资料下载中心<span style="font-size:0.2rem;font-weight:bold;color: #000;">不会收集</span>任何个人信息
         </div>
     </div>
 
