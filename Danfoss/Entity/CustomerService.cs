@@ -83,17 +83,25 @@ namespace Danfoss.Entity
         /// <param name="log"></param>
         public static void AddSendEmailLog(SendEmailLog log)
         {
-            using (var db = new DanfossDbEntities())
+            try
             {
-                var model = db.Customer.FirstOrDefault(o => o.OpenId == log.OpenId);
-                if (model != null)
+                using (var db = new DanfossDbEntities())
                 {
-                    model.Email = log.Email;
-                    db.Customer.Attach(model);
-                    db.Entry(model).State = EntityState.Modified;
+
+                    var model = db.Customer.FirstOrDefault(o => o.OpenId == log.OpenId);
+                    if (model != null)
+                    {
+                        model.Email = log.Email;
+                        db.Customer.Attach(model);
+                        db.Entry(model).State = EntityState.Modified;
+                    }
+                    db.SendEmailLog.Add(log);
+                    db.SaveChanges();
                 }
-                db.SendEmailLog.Add(log);
-                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Lgr.Log.Error(ex.Message, ex);
             }
         }
         /// <summary>

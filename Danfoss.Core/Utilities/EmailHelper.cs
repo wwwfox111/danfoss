@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using System.Web;
+using AegisImplicitMail;
+using System.ComponentModel;
 
 namespace Danfoss.Core.Utilities
 {
@@ -29,11 +31,15 @@ namespace Danfoss.Core.Utilities
             string userPassword = ConfigurationManager.AppSettings["MailPassword"];//登陆密码
 
             // 邮件服务设置
-            SmtpClient smtpClient = new SmtpClient();
-            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;//指定电子邮件发送方式
-            smtpClient.Host = smtpServer; //指定SMTP服务器
-            smtpClient.Credentials = new System.Net.NetworkCredential(mailFrom, userPassword);//用户名和密码
-            //smtpClient.Port = 465;
+            SmtpClient smtpClient = new SmtpClient
+            {
+                DeliveryMethod = SmtpDeliveryMethod.Network,//指定电子邮件发送方式
+                Host = smtpServer, //指定SMTP服务器
+                Credentials = new System.Net.NetworkCredential(mailFrom, userPassword),//用户名和密码
+                Port = 587,
+                EnableSsl = true,
+                //UseDefaultCredentials = true
+            };
             // 发送邮件设置       
             MailMessage mailMessage = new MailMessage(mailFrom, mailTo); // 发送人和收件人
             mailMessage.Subject = mailSubject;//主题
@@ -74,5 +80,33 @@ namespace Danfoss.Core.Utilities
             //    }
             //}
         }
+
+
+        public static void SendEmailMime(string mailTo, string mailSubject, string mailContent, SendCompletedEventHandler sendCompleted = null)
+        {
+            // 设置发送方的邮件信息,例如使用网易的smtp
+            string smtpServer = ConfigurationManager.AppSettings["SmtpServer"];// SMTP服务器
+            string mailFrom = ConfigurationManager.AppSettings["MailFrom"];// 登陆用户名
+            string userPassword = ConfigurationManager.AppSettings["MailPassword"];//登陆密码
+            //Generate Message
+            var mailMessage = new MimeMailMessage();
+            mailMessage.From = new MimeMailAddress(mailFrom);
+            mailMessage.To.Add(mailTo);
+            mailMessage.Subject = mailSubject;
+            mailMessage.Body = mailContent;
+            //Create Smtp Client
+            var mailer = new MimeMailer(smtpServer, 465);
+            mailer.User = mailFrom;
+            mailer.Password = userPassword;
+            mailer.SslType = SslMode.Ssl;
+            mailer.AuthenticationMode = AuthenticationType.Base64;
+
+            //Set a delegate function for call back
+            if (sendCompleted != null)
+                mailer.SendCompleted += sendCompleted;
+            mailer.SendMail(mailMessage);
+        }
+
+
     }
 }

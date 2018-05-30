@@ -13,6 +13,8 @@ using System.IO;
 using System.Data;
 using Danfoss.Core.Utility;
 using System.Configuration;
+using System.ComponentModel;
+
 namespace Danfoss.Controllers
 {
     public class HomeController : BaseController
@@ -50,21 +52,26 @@ namespace Danfoss.Controllers
         public ActionResult SendEmail(string emailAddress, List<Solution> solutions)
         {
             var content = WebHelper.GetViewHtml(this.ControllerContext, "~/Views/Shared/EmailTemplate_New.cshtml", solutions);
-            var result = EmailHelper.SendEmail(emailAddress, "丹佛斯资料下载", content);
+            bool result = true;
+            EmailHelper.SendEmailMime(emailAddress, "Danfoss Download", content, (object obj, AsyncCompletedEventArgs e) =>
+            {
+                if (e.Error != null)
+                    result = false;
+            });
             if (result)
             {
                 #region  保存邮箱地址
-                //using (var db = new DanfossDbEntities())
-                //{
-                //    var model = db.Customer.FirstOrDefault(o => o.OpenId == CurAccount);
-                //    if (model != null)
-                //    {
-                //        model.Email = emailAddress;
-                //        db.Customer.Attach(model);
-                //        db.Entry(model).State = EntityState.Modified;
-                //        db.SaveChanges();
-                //    }
-                //}
+                using (var db = new DanfossDbEntities())
+                {
+                    var model = db.Customer.FirstOrDefault(o => o.OpenId == CurAccount);
+                    if (model != null)
+                    {
+                        model.Email = emailAddress;
+                        db.Customer.Attach(model);
+                        db.Entry(model).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                }
                 var fileName = string.Empty;
                 solutions.ForEach(o =>
                 {
